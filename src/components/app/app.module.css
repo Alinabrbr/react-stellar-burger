@@ -17,7 +17,7 @@
   align-items: center;
 }
 
-.linkBorder {
+.border {
   border: 1px dashed #4C4CFF;
 }
 
@@ -47,7 +47,16 @@
   justify-content: center;
 }
 
-
 .burgerIngredients {
+
+}
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+}
+
+.price {
+  display: flex;
 
 }
