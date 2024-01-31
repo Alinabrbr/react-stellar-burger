@@ -1,12 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  color: var(--text-primary-color);
+  background: var(--background-alt);
+}
+
+.body::-webkit-scrollbar {
+  width: 12px;
+}
+.body::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+.body::-webkit-scrollbar-thumb {
+  background: #8585AD;
+  border: 3px solid #2F2F37;
+  border-radius: 6px;
+}
+
 .app {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: max-content;
   background-color: #131316;
 }
 
 .header {
-  border: 2px solid #4C4CFF;
   min-width: 100%;
 }
 
@@ -15,10 +38,6 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-}
-
-.border {
-  border: 1px dashed #4C4CFF;
 }
 
 .link {
@@ -36,7 +55,6 @@
 }
 
 .navContainer {
-  border: 1px dashed #4C4CFF;
   border-radius: 40px;
 }
 
@@ -48,7 +66,7 @@
 }
 
 .burgerIngredients {
-
+  max-width: 600px;
 }
 
 .tabs {
@@ -56,7 +74,33 @@
   flex-direction: row;
 }
 
-.price {
+.priceContainer {
   display: flex;
-
+  flex-direction: row;
 }
+
+.cardsContainer {
+  max-height: 756px;
+  overflow-y: scroll;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 272px);
+  grid-template-rows: repeat(auto-fit, 208px);
+  gap: 24px 40px;
+}
+
+.cardsContainer::-webkit-scrollbar {
+  width: 12px;
+}
+.cardsContainer::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+.cardsContainer::-webkit-scrollbar-thumb {
+  background: #8585AD;
+  border: 3px solid #2F2F37;
+  border-radius: 6px;
+}
+
+
