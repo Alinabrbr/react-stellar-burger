@@ -10,23 +10,25 @@ body {
   background: var(--background-alt);
 }
 
-.body::-webkit-scrollbar {
-  width: 12px;
-}
-.body::-webkit-scrollbar-track {
-  background: #2F2F37;
-}
-.body::-webkit-scrollbar-thumb {
-  background: #8585AD;
-  border: 3px solid #2F2F37;
-  border-radius: 6px;
-}
+/*.body::-webkit-scrollbar {*/
+/*  width: 12px;*/
+/*}*/
+/*.body::-webkit-scrollbar-track {*/
+/*  background: #2F2F37;*/
+/*}*/
+/*.body::-webkit-scrollbar-thumb {*/
+/*  background: #8585AD;*/
+/*  border: 3px solid #2F2F37;*/
+/*  border-radius: 6px;*/
+/*}*/
 
 .app {
   display: flex;
   flex-direction: column;
-  height: max-content;
+  /*height: max-content;*/
   background-color: #131316;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .header {
@@ -36,8 +38,8 @@ body {
 .headerContainer {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
   align-items: center;
+  justify-content: space-between;
 }
 
 .link {
@@ -54,8 +56,16 @@ body {
   gap: 8px;
 }
 
+.container {
+  display: flex;
+}
+
 .navContainer {
-  border-radius: 40px;
+  display: flex;
+}
+
+.logo {
+  margin-left: 112px;
 }
 
 .main {
@@ -63,6 +73,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  padding: 0 20px;
 }
 
 .burgerIngredients {
@@ -77,18 +88,21 @@ body {
 .priceContainer {
   display: flex;
   flex-direction: row;
-}
-
-.cardsContainer {
-  max-height: 756px;
-  overflow-y: scroll;
+  justify-content: flex-end;
+  gap: 40px;
+  margin-right: 8px;
 }
 
 .cards {
   display: grid;
   grid-template-columns: repeat(2, 272px);
   grid-template-rows: repeat(auto-fit, 208px);
-  gap: 24px 40px;
+  gap: 32px 24px;
+}
+
+.cardsContainer {
+  max-height: 756px;
+  overflow-y: scroll;
 }
 
 .cardsContainer::-webkit-scrollbar {
@@ -102,5 +116,31 @@ body {
   border: 3px solid #2F2F37;
   border-radius: 6px;
 }
+
+
+.burgerIngredientsContainer {
+  max-height: 480px;
+  overflow-y: scroll;
+  margin-left: 18px;
+}
+
+.burgerIngredientsContainer::-webkit-scrollbar {
+  width: 12px;
+}
+.burgerIngredientsContainer::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+.burgerIngredientsContainer::-webkit-scrollbar-thumb {
+  background: #8585AD;
+  border: 3px solid #2F2F37;
+  border-radius: 6px;
+}
+
+.burgerConstructor {
+  max-height: 900px;
+  padding-right: 16px;
+}
+
+
 
 

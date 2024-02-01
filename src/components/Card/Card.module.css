@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   text-align: center;
-  box-sizing: border-box;
+  position: relative;
 }
 
-.image {
-  max-width: 240px;
-  height: 120px;
+.counter {
+  position: absolute;
+  left: 256px;
 }
