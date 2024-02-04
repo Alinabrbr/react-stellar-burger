@@ -1,0 +1,24 @@
+.container {
+  position: relative;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  color: #8585AD;
+}
+
+.listItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  text-align: left;
+}
+
+.text {
+  text-align: center;
+}
