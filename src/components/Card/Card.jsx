@@ -3,11 +3,10 @@ import Price from "../Price/Price";
 import styles from "../Card/Card.module.css";
 import clsx from "clsx";
 import {Counter} from "@ya.praktikum/react-developer-burger-ui-components";
-import openModal from "../../hooks/use-modal/useModal";
 
 export default function Card(props) {
     return (
-        <li className={clsx(styles.card)} onClick={() => openModal(props)}>
+        <li onClick={() => props.openModal()} className={clsx(styles.card)}>
             <div className={styles.counter}>
                 <Counter count={1} size="default"/>
             </div>

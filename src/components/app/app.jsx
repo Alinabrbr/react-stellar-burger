@@ -1,25 +1,20 @@
 import React, {useState, useEffect} from "react";
 import styles from "./app.module.css";
 import {
-    BurgerIcon,
-    Logo,
-    ListIcon,
-    ProfileIcon,
     Button,
     Tab
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import clsx from "clsx";
-import NavBar from "../Nav-bar/Nav-bar";
 import Container from "../Container/Container";
 import Card from "../Card/Card";
 import Price from "../Price/Price";
 import BurgerConstructor from "../Burger-constructor/Burger-Constructor";
 import IngredientDetails from "../Ingredient-details/Ingredient-details";
-import modalState from "../../hooks/use-modal/useModal";
-import closeModal from "../../hooks/use-modal/useModal";
-import ModalOverlay from "../Modal-overlay/Modal-overlay";
+import Modal from "../Modal/Modal";
+import Header from "../Header/Header";
 
-function App() {
+ function App() {
+
     const API = 'https://norma.nomoreparties.space/api/ingredients';
     const [cards, setCards] = useState([]);
     const getCard = () => {
@@ -33,45 +28,19 @@ function App() {
         getCard();
     }, []);
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    }
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    }
+
     return (
         <div className={styles.app}>
-            <header className={clsx(styles.header, 'pt-4 pb-4')}>
-                <div className={styles.headerContainer}>
-                    <div className={styles.container}>
-                        <div className={styles.menuContainer}>
-                            <div className={clsx(styles.navContainer, 'pt-4 pb-4 pl-5 pr-5')}>
-                                <NavBar>
-                                    <BurgerIcon type="primary"/>
-                                    <p className='text text_type_main-default ml-2'>Конструктор</p>
-                                </NavBar>
-                            </div>
-
-                            <div className={clsx(styles.navContainer, 'pt-4 pb-4 pl-5 pr-5')}>
-                                <NavBar>
-                                    <ListIcon type="secondary"/>
-                                    <p className='text text_type_main-default text_color_inactive ml-2'>Лента
-                                        заказов</p>
-                                </NavBar>
-                            </div>
-
-                        </div>
-
-                        <div className={styles.logo}>
-                            <NavBar>
-                                <Logo/>
-                            </NavBar>
-                        </div>
-                    </div>
-
-                    <div className={clsx(styles.navContainer, 'pt-4 pb-4 pl-5 pr-5')}>
-                        <NavBar>
-                            <ProfileIcon type="secondary"/>
-                            <p className='text text_type_main-default text_color_inactive ml-2'>Личный
-                                кабинет</p>
-                        </NavBar>
-                    </div>
-                </div>
-            </header>
+            <Header></Header>
             <main className={styles.main}>
                 <section className={clsx(styles.burgerIngredients, 'mr-10')}>
                     <h1 className='text text_type_main-large mt-10'>Соберите
@@ -91,24 +60,24 @@ function App() {
                         <h2 className='text text_type_main-medium'>Булки</h2>
                         <ul className={clsx(styles.cards, 'mt-6 ml-4')}>
                             {cards.map((card) => (
-                                card.type === "bun" && <Card priceSize={"default"} {...card} key={card._id}/>
+                                card.type === "bun" && <Card openModal={openModal} {...card} key={card._id}/>
                             ))}
                         </ul>
 
                         <h2 className='text text_type_main-medium mt-10'>Соусы</h2>
                         <ul className={clsx(styles.cards, 'mt-6 ml-4')}>
                             {cards.map((card) => (
-                                card.type === "sauce" && <Card priceSize={"default"} {...card} key={card._id}/>
+                                card.type === "sauce" && <Card openModal={openModal} priceSize={"default"} {...card} key={card._id}/>
                             ))}
                         </ul>
                         <h2 className='text text_type_main-medium mt-10'>Начинки</h2>
                         <ul className={clsx(styles.cards, 'mt-6 ml-4')}>
                             {cards.map((card) => (
-                                card.type === "main" && <Card priceSize={"default"} {...card} key={card._id}/>
+                                card.type === "main" && <Card openModal={openModal} priceSize={"default"} {...card} key={card._id}/>
                             ))}
                         </ul>
                     </div>
-                    {modalState && <ModalOverlay onClick={closeModal}><IngredientDetails/></ModalOverlay>}
+                    {isModalOpen && <Modal closeModal={closeModal}><IngredientDetails/></Modal>}
                 </section>
 
                 <section className={clsx(styles.burgerConstructor, 'mt-25')}>

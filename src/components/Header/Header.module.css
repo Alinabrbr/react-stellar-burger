@@ -1,0 +1,28 @@
+.header {
+  min-width: 100%;
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menuContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.container {
+  display: flex;
+}
+
+.navContainer {
+  display: flex;
+}
+
+.logo {
+  margin-left: 112px;
+}

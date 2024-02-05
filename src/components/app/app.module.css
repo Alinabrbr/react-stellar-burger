@@ -10,62 +10,12 @@ body {
   background: var(--background-alt);
 }
 
-/*.body::-webkit-scrollbar {*/
-/*  width: 12px;*/
-/*}*/
-/*.body::-webkit-scrollbar-track {*/
-/*  background: #2F2F37;*/
-/*}*/
-/*.body::-webkit-scrollbar-thumb {*/
-/*  background: #8585AD;*/
-/*  border: 3px solid #2F2F37;*/
-/*  border-radius: 6px;*/
-/*}*/
-
 .app {
   display: flex;
   flex-direction: column;
-  /*height: max-content;*/
   background-color: #131316;
   max-width: 1280px;
   margin: 0 auto;
-}
-
-.header {
-  min-width: 100%;
-}
-
-.headerContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.link {
-  list-style: none;
-  text-decoration: none;
-  color: #F2F2F3;
-  display: flex;
-  flex-direction: row;
-}
-
-.menuContainer {
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-}
-
-.container {
-  display: flex;
-}
-
-.navContainer {
-  display: flex;
-}
-
-.logo {
-  margin-left: 112px;
 }
 
 .main {
@@ -73,7 +23,6 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  /*padding: 0 20px;*/
 }
 
 .burgerIngredients {

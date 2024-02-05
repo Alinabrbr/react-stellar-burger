@@ -16,9 +16,13 @@
   z-index: 2;
 }
 
+.modalActive {
+  transform: scale(1);
+}
+
 .closeIcon {
   position: absolute;
-  top: 33.5%;
-  right: 29%;
+  top: 17.5%;
+  right: 6%;
   z-index: 10;
 }

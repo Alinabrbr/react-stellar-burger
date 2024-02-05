@@ -1,0 +1,7 @@
+.link {
+  list-style: none;
+  text-decoration: none;
+  color: #F2F2F3;
+  display: flex;
+  flex-direction: row;
+}
