@@ -1,12 +1,16 @@
 import React from "react";
-import styles from "../app/app.module.css";
+import PropTypes from "prop-types";
 
 function Container (props) {
     return (
-        <div className={styles.border_type_dashed}>
+        <div>
             {props.children}
         </div>
     )
 }
 
 export default Container;
+
+Container.propTypes = {
+    children: PropTypes.element
+};

@@ -1,0 +1,23 @@
+.burgerIngredientsContainer {
+  box-sizing: border-box;
+  max-height: 480px;
+  overflow-y: scroll;
+}
+
+.burgerIngredientsContainer::-webkit-scrollbar {
+  width: 8px;
+}
+.burgerIngredientsContainer::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+.burgerIngredientsContainer::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
+.priceContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 40px;
+  margin-right: 8px;
+}

@@ -2,6 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import styles from "./Price.module.css";
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from "prop-types";
 
 function Price(props) {
     return (
@@ -13,3 +14,8 @@ function Price(props) {
 }
 
 export default Price;
+
+Price.propTypes = {
+    prise: PropTypes.number,
+    priceSize: PropTypes.string
+}
