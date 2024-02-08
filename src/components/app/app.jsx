@@ -1,17 +1,35 @@
+import React, {useState, useEffect} from "react";
 import styles from "./app.module.css";
-import { data } from "../../utils/data";
+import Header from "../Header/Header";
+import SectionBurgerConstructor from "../SectionBurgerConstructor/SectionBurgerConstructor";
+import SectionBurgerIngredients from "../SectionBurgerIngredients/SectionBurgerIngredients";
 
 function App() {
-  return (
-    <div className={styles.app}>
-      <pre style={{
-      	margin: "auto",
-      	fontSize: "1.5rem"
-      }}>
-      	Измените src/components/app/app.jsx и сохраните для обновления.
-      </pre>
-    </div>
-  );
+    const [cards, setCards] = useState([]);
+
+    const getCard = () => {
+        fetch('https://norma.nomoreparties.space/api/ingredients')
+            .then((res) => res.ok ? res.json() : Promise.reject(new Error('Отклонено')))
+            .then((data) => setCards(data.data))
+            .catch((err) => {
+                console.log(err)
+            });
+    }
+
+    useEffect(() => {
+        getCard()
+    }, []);
+
+    return (
+        <div className={styles.app}>
+            <Header/>
+            <main className={styles.main}>
+                <SectionBurgerIngredients cards={cards}/>
+
+                <SectionBurgerConstructor cards={cards}/>
+            </main>
+        </div>
+    );
 }
 
 export default App;
