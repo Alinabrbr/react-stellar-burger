@@ -10,7 +10,6 @@ import useModal from "../../hooks/useModal";
 
 export default function Card({card, priceSize}) {
     const {isModalState, openModal, closeModal} = useModal();
-    console.log(priceSize);
 
     return (
         <>

@@ -9,7 +9,7 @@ function App() {
 
     const getCard = () => {
         fetch('https://norma.nomoreparties.space/api/ingredients')
-            .then((res) => res.json())
+            .then((res) => res.ok ? res.json() : Promise.reject(new Error('Отклонено')))
             .then((data) => setCards(data.data))
             .catch((err) => {
                 console.log(err)
