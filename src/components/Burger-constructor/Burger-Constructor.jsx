@@ -16,7 +16,6 @@ export default function BurgerConstructor (props) {
 BurgerConstructor.propTypes = {
     name: PropTypes.string,
     isLocked: PropTypes.bool,
-    type: PropTypes.string,
     image: PropTypes.string,
     price: PropTypes.number
 };

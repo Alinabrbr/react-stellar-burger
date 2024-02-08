@@ -7,6 +7,7 @@ import {Button, ConstructorElement} from "@ya.praktikum/react-developer-burger-u
 import Modal from "../Modal/Modal";
 import OrderDetails from "../Order-details/Order-details";
 import useModal from "../../hooks/useModal";
+import PropTypes from "prop-types";
 
 export default function SectionBurgerConstructor ({cards}){
 
@@ -53,4 +54,12 @@ export default function SectionBurgerConstructor ({cards}){
             {isModalState && <Modal closeModal={closeModal}><OrderDetails/></Modal>}
         </>
     )
+}
+
+SectionBurgerConstructor.propTypes = {
+    type: PropTypes.string,
+    name: PropTypes.string,
+    image: PropTypes.string,
+    price: PropTypes.number,
+    _id: PropTypes.number
 }

@@ -4,6 +4,7 @@ import Container from "../Container/Container";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import Card from "../Card/Card";
 import React from "react";
+import PropTypes from "prop-types";
 
 
 export default function SectionBurgerIngredients ({cards}){
@@ -44,4 +45,9 @@ export default function SectionBurgerIngredients ({cards}){
             </div>
         </section>
     )
+}
+
+SectionBurgerIngredients.propTypes = {
+    type: PropTypes.string,
+    _id: PropTypes.number
 }

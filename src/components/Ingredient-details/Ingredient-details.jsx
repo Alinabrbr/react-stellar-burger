@@ -1,5 +1,6 @@
 import React from "react";
 import styles from './Ingredient-details.module.css'
+import PropTypes from "prop-types";
 
 export default function IngredientDetails({card}) {
     return (
@@ -36,3 +37,12 @@ export default function IngredientDetails({card}) {
         </>
     )
 }
+
+IngredientDetails.propTypes = {
+    image_large: PropTypes.string,
+    name: PropTypes.string,
+    calories: PropTypes.number,
+    proteins: PropTypes.string,
+    fat: PropTypes.string,
+    carbohydrates: PropTypes.string
+};
