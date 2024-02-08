@@ -1,16 +1,23 @@
+.burgerConstructor {
+  max-height: 900px;
+}
+
 .burgerIngredientsContainer {
-  box-sizing: border-box;
+
+}
+
+.burgerIngredientsContainerScroll {
   max-height: 480px;
   overflow-y: scroll;
 }
 
-.burgerIngredientsContainer::-webkit-scrollbar {
+.burgerIngredientsContainerScroll::-webkit-scrollbar {
   width: 8px;
 }
-.burgerIngredientsContainer::-webkit-scrollbar-track {
+.burgerIngredientsContainerScroll::-webkit-scrollbar-track {
   background: #2F2F37;
 }
-.burgerIngredientsContainer::-webkit-scrollbar-thumb {
+.burgerIngredientsContainerScroll::-webkit-scrollbar-thumb {
   background: #8585AD;
 }
 

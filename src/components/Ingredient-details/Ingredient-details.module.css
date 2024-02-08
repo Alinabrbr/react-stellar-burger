@@ -2,11 +2,20 @@
   position: relative;
 }
 
+.infoContainer {
+  text-align: center;
+}
+
+.title {
+  text-align: left;
+}
+
 .list {
   display: flex;
   flex-direction: row;
   gap: 20px;
   color: #8585AD;
+  justify-content: center;
 }
 
 .listItem {

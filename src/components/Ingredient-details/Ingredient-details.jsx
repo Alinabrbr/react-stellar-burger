@@ -5,10 +5,10 @@ export default function IngredientDetails({card}) {
     return (
         <>
             <div className={styles.container}>
-                <h2 className='text_type_main-large'>Детали ингредиента</h2>
+                <h2 className='text_type_main-large title'>Детали ингредиента</h2>
                 <img src={card.image_large} alt={card.name}/>
-                <p className='text_type_main-medium mt-4 mb-8'>{card.name}</p>
-                <div>
+                <div className={styles.infoContainer}>
+                    <p className='text_type_main-medium mt-4 mb-8'>{card.name}</p>
                     <div className={styles.list}>
                         <div className={styles.listItem}>
                             <p className='text_type_main-default'>Калории,ккал</p>

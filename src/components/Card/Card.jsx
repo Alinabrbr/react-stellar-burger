@@ -8,8 +8,9 @@ import Modal from "../Modal/Modal";
 import IngredientDetails from "../Ingredient-details/Ingredient-details";
 import useModal from "../../hooks/useModal";
 
-export default function Card({card}) {
+export default function Card({card, priceSize}) {
     const {isModalState, openModal, closeModal} = useModal();
+    console.log(priceSize);
 
     return (
         <>
@@ -18,7 +19,7 @@ export default function Card({card}) {
                 <Counter count={1} size="default"/>
             </div>
             <img className='mr-4 ml-4' src={card.image} alt={card.name}/>
-            <Price price={card.price}></Price>
+            <Price price={card.price} priceSize={priceSize}></Price>
             <p className='text_type_main-default'>{card.name}</p>
         </li>
         {isModalState && <Modal closeModal={closeModal}><IngredientDetails card={card}/></Modal>}
