@@ -4,10 +4,13 @@ import Container from "../Container/Container";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import Card from "../Card/Card";
 import React from "react";
-import PropTypes from "prop-types";
+import {useSelector} from "react-redux";
+import {getCards} from "../../services/actions/card";
 
+export default function SectionBurgerIngredients() {
 
-export default function SectionBurgerIngredients ({cards}){
+    const cards = useSelector(getCards);
+
     return (
         <section className={clsx(styles.burgerIngredients, 'mr-10')}>
             <h1 className='text text_type_main-large mt-10'>Соберите бургер</h1>
@@ -25,29 +28,21 @@ export default function SectionBurgerIngredients ({cards}){
             <div className={styles.cardsContainer}>
                 <h2 className='text text_type_main-medium'>Булки</h2>
                 <ul className={clsx(styles.cards, 'mt-6 ml-4')}>
-                    {cards.map((card) => (
-                        card.type === "bun" && <Card priceSize={"default"} card={card} key={card._id}/>
-                    ))}
+                    {cards.map((card) => (card.type === "bun" &&
+                        <Card priceSize={"default"} card={card} key={card._id}/>))}
                 </ul>
 
                 <h2 className='text text_type_main-medium mt-10'>Соусы</h2>
                 <ul className={clsx(styles.cards, 'mt-6 ml-4')}>
-                    {cards.map((card) => (
-                        card.type === "sauce" && <Card priceSize={"default"} card={card} key={card._id}/>
-                    ))}
+                    {cards.map((card) => (card.type === "sauce" &&
+                        <Card priceSize={"default"} card={card} key={card._id}/>))}
                 </ul>
                 <h2 className='text text_type_main-medium mt-10'>Начинки</h2>
                 <ul className={clsx(styles.cards, 'mt-6 ml-4')}>
-                    {cards.map((card) => (
-                        card.type === "main" && <Card priceSize={"default"} card={card} key={card._id}/>
-                    ))}
+                    {cards.map((card) => (card.type === "main" &&
+                        <Card priceSize={"default"} card={card} key={card._id}/>))}
                 </ul>
             </div>
         </section>
     )
-}
-
-SectionBurgerIngredients.propTypes = {
-    type: PropTypes.string,
-    _id: PropTypes.number
 }

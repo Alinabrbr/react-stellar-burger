@@ -7,12 +7,28 @@ import {Button, ConstructorElement} from "@ya.praktikum/react-developer-burger-u
 import Modal from "../Modal/Modal";
 import OrderDetails from "../Order-details/Order-details";
 import useModal from "../../hooks/useModal";
-import PropTypes from "prop-types";
+import {useDispatch, useSelector} from "react-redux";
+import {getCards} from "../../services/actions/card";
+import {closePopup, openPopup} from "../../services/constructorSlice";
+import {getModalOrderSelector} from "../../services/getModalOrderSelector";
 
-export default function SectionBurgerConstructor ({cards}){
+export default function SectionBurgerConstructor (){
 
-    const {isModalState, openModal, closeModal} = useModal();
+    const cards = useSelector(getCards);
+
+    // const {isModalState, openModal, closeModal} = useModal();
     const bun = cards.find(card => card.type === 'bun');
+
+    const modalOrderState = useSelector(getModalOrderSelector)
+    const dispatch = useDispatch();
+
+    const openModal = () => {
+        dispatch(openPopup())
+    };
+
+    const closeModal = () => {
+        dispatch(closePopup())
+    };
 
     return (
         <>
@@ -51,15 +67,7 @@ export default function SectionBurgerConstructor ({cards}){
                 </div>
             </section>
 
-            {isModalState && <Modal closeModal={closeModal}><OrderDetails/></Modal>}
+            {modalOrderState && <Modal closeModal={closeModal}><OrderDetails/></Modal>}
         </>
     )
-}
-
-SectionBurgerConstructor.propTypes = {
-    type: PropTypes.string,
-    name: PropTypes.string,
-    image: PropTypes.string,
-    price: PropTypes.number,
-    _id: PropTypes.number
 }

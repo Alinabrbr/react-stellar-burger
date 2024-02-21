@@ -1,0 +1,1 @@
+export const getModalOrderSelector = store => store.popupOrder.isModalState;
