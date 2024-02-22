@@ -9,6 +9,7 @@ import IngredientDetails from "../Ingredient-details/Ingredient-details";
 import {useDispatch, useSelector} from "react-redux";
 import {getModalInfoSelector} from "../../services/getModalInfoSelector";
 import {closePopup, openPopup} from "../../services/ingredientsInfoSlice";
+import {useDrag} from "react-dnd";
 
 export default function Card({card, priceSize}) {
 
@@ -22,9 +23,15 @@ export default function Card({card, priceSize}) {
     const closeModal = () => {
         dispatch(closePopup())
     };
+
+    const [, dragRef] = useDrag({
+        type: "ingredient",
+        item: card,
+    });
+
     return (
         <>
-            <li onClick={openModal} className={clsx(styles.card)}>
+            <li onClick={openModal} className={clsx(styles.card)} ref={dragRef}>
                 <div className={styles.counter}>
                     <Counter count={1} size="default"/>
                 </div>

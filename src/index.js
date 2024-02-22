@@ -7,17 +7,18 @@ import {Provider} from "react-redux";
 import {configureStore} from "@reduxjs/toolkit";
 import cardsReducer from "./services/cardsSlice";
 import popupInfoReducer from "./services/ingredientsInfoSlice";
-import popupOrderReducer from "./services/constructorSlice";
+import popupOrderReducer from "./services/orderSlice";
+import burgerConstructorReducer from "./services/constructorSlice";
 
 
 export const store = configureStore({
     reducer: {
         cards: cardsReducer,
         popupInfo: popupInfoReducer,
-        popupOrder: popupOrderReducer
+        popupOrder: popupOrderReducer,
+        burgerConstructor: burgerConstructorReducer
     }
 })
-
 
 ReactDOM.render(
     <React.StrictMode>

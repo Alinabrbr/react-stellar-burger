@@ -25,7 +25,7 @@ export default function SectionBurgerIngredients() {
                     <Tab>Начинки</Tab>
                 </Container>
             </div>
-            <div className={styles.cardsContainer}>
+            <div className={styles.cardsContainer} >
                 <h2 className='text text_type_main-medium'>Булки</h2>
                 <ul className={clsx(styles.cards, 'mt-6 ml-4')}>
                     {cards.map((card) => (card.type === "bun" &&

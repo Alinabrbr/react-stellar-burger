@@ -6,17 +6,17 @@ import Price from "../Price/Price";
 import {Button, ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../Modal/Modal";
 import OrderDetails from "../Order-details/Order-details";
-import useModal from "../../hooks/useModal";
 import {useDispatch, useSelector} from "react-redux";
-import {getCards} from "../../services/actions/card";
-import {closePopup, openPopup} from "../../services/constructorSlice";
+import {closePopup, openPopup} from "../../services/orderSlice";
 import {getModalOrderSelector} from "../../services/getModalOrderSelector";
+import {addIngredient, removeIngredient} from "../../services/constructorSlice";
+import {useDrop} from "react-dnd";
+import {constructorSelector} from "../../services/constructorSelector";
 
-export default function SectionBurgerConstructor (){
+export default function SectionBurgerConstructor() {
 
-    const cards = useSelector(getCards);
+    const cards = useSelector(constructorSelector);
 
-    // const {isModalState, openModal, closeModal} = useModal();
     const bun = cards.find(card => card.type === 'bun');
 
     const modalOrderState = useSelector(getModalOrderSelector)
@@ -30,24 +30,35 @@ export default function SectionBurgerConstructor (){
         dispatch(closePopup())
     };
 
+    const [, dropRef] = useDrop({
+        accept: "ingredient",
+        drop(card) {
+            dispatch(addIngredient(card));
+        }
+    });
+
+    const deleteIngredient = (card) => {
+        dispatch(removeIngredient(card));
+    }
+
     return (
         <>
-            <section className={clsx(styles.burgerConstructor, 'mt-25')}>
+            <section className={clsx(styles.burgerConstructor, 'mt-25')} ref={dropRef}
+                     onDragOver={(evt) => evt.preventDefault()}>
                 <div className={clsx(styles.burgerIngredientsContainer, 'pl-8')}>
                     <div className='mr-4 ml-4'>
-                {
-                    bun && (
-                    <ConstructorElement text={bun.name} isLocked='isLocked' type='top' thumbnail={bun.image} price={bun.price} />
-
-                    )
-                }
+                        {
+                            bun && (
+                                <ConstructorElement text={`${bun.name} (верх)`} isLocked='isLocked' type='top' thumbnail={bun.image} price={bun.price}/>
+                            )
+                        }
                     </div>
                 </div>
 
                 <div className={clsx(styles.burgerIngredientsContainerScroll, 'mb-4')}>
                     <div className='mr-4'>
                         {cards.map((card) => (
-                            card.type === 'main' && <BurgerConstructor {...card} key={card._id}/>
+                            (card.type === "main" || card.type ==='sauce') && <BurgerConstructor {...card} key={card.ingredientId} handleClose={() => deleteIngredient(card.ingredientId)}/>
                         ))}
                     </div>
                 </div>
@@ -55,7 +66,8 @@ export default function SectionBurgerConstructor (){
                 <div className={clsx(styles.burgerIngredientsContainer, 'pl-8')}>
                     <div className='mr-4 ml-4'>
                         {
-                            bun && ( <ConstructorElement text={bun.name} isLocked='isLocked' type='bottom' thumbnail={bun.image} price={bun.price} />
+                            bun && (
+                                <ConstructorElement text={`${bun.name} (низ)`} isLocked='isLocked' type='bottom' thumbnail={bun.image} price={bun.price}/>
                             )
                         }
                     </div>

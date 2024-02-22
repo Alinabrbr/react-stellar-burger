@@ -6,6 +6,8 @@ import SectionBurgerIngredients from "../SectionBurgerIngredients/SectionBurgerI
 import {useDispatch} from "react-redux";
 import {getCard} from "../../utils/Api";
 import {cardsLoaded, cardsLoadError, cardsUploading} from "../../services/cardsSlice";
+import {DndProvider} from "react-dnd";
+import {HTML5Backend} from "react-dnd-html5-backend";
 
 function App() {
 
@@ -21,11 +23,13 @@ function App() {
     return (
         <div className={styles.app}>
             <Header/>
-            <main className={styles.main}>
-                <SectionBurgerIngredients/>
+            <DndProvider backend={HTML5Backend}>
+                <main className={styles.main}>
+                    <SectionBurgerIngredients/>
 
-                <SectionBurgerConstructor/>
-            </main>
+                    <SectionBurgerConstructor/>
+                </main>
+            </DndProvider>
         </div>
     );
 }

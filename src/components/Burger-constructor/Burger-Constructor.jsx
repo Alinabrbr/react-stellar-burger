@@ -8,7 +8,7 @@ export default function BurgerConstructor (props) {
     return (
         <div className={clsx(styles.burgerContainer, 'mt-4 ml-4')}>
             <DragIcon type="primary"/>
-            <ConstructorElement text={props.name} isLocked={props.isLocked} thumbnail={props.image} price={props.price} />
+            <ConstructorElement text={props.name} isLocked={props.isLocked} thumbnail={props.image} price={props.price} handleClose={props.handleClose}/>
         </div>
     )
 }
