@@ -57,8 +57,8 @@ export default function SectionBurgerConstructor() {
 
                 <div className={clsx(styles.burgerIngredientsContainerScroll, 'mb-4')}>
                     <div className='mr-4'>
-                        {cards.map((card) => (
-                            (card.type === "main" || card.type ==='sauce') && <BurgerConstructor {...card} key={card.ingredientId} handleClose={() => deleteIngredient(card.ingredientId)}/>
+                        {cards.map((card, index) => (
+                            (card.type === "main" || card.type ==='sauce') && <BurgerConstructor card={card} index={index} key={card.ingredientId} handleClose={() => deleteIngredient(card.ingredientId)}/>
                         ))}
                     </div>
                 </div>

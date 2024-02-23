@@ -4,8 +4,7 @@ import Header from "../Header/Header";
 import SectionBurgerConstructor from "../SectionBurgerConstructor/SectionBurgerConstructor";
 import SectionBurgerIngredients from "../SectionBurgerIngredients/SectionBurgerIngredients";
 import {useDispatch} from "react-redux";
-import {getCard} from "../../utils/Api";
-import {cardsLoaded, cardsLoadError, cardsUploading} from "../../services/cardsSlice";
+import { takeCards} from "../../services/cardsSlice";
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
 
@@ -14,10 +13,7 @@ function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(cardsUploading());
-        getCard()
-            .then(res => dispatch(cardsLoaded(res.data)))
-            .catch(err => dispatch(cardsLoadError(err.message)))
+        dispatch(takeCards());
     }, [dispatch]);
 
     return (

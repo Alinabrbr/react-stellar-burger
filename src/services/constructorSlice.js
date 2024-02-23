@@ -28,8 +28,13 @@ const constructorSlice = createSlice({
         removeIngredient: (state, action) => {
             state.constructorIngredient = state.constructorIngredient.filter((ingredient) => ingredient.ingredientId !== action.payload);
         },
+        sortIngredients: (state, action) => {
+            const {indexFrom, indexTo, ingredient} = action.payload;
+            state.constructorIngredient.splice(indexFrom, 1);
+            state.constructorIngredient.splice(indexTo, 0, ingredient);
+        }
     }
 })
 
 export default constructorSlice.reducer;
-export const {addIngredient, removeIngredient} = constructorSlice.actions;
+export const {addIngredient, removeIngredient, sortIngredients} = constructorSlice.actions;
