@@ -2,7 +2,8 @@ import {createSlice} from "@reduxjs/toolkit";
 import {v4 as uuidv4} from 'uuid';
 
 const initialState = {
-    constructorIngredient: []
+    constructorIngredient: [],
+    totalPrice: 0,
 };
 
 const constructorSlice = createSlice({
@@ -11,10 +12,13 @@ const constructorSlice = createSlice({
     reducers: {
         addIngredient: {
             reducer: (state, action) => {
-                if (action.payload.type === 'bun' && state.constructorIngredient.map((ingredient) => ingredient.type === "bun")) {
+                if (action.payload.type === 'bun' && state.constructorIngredient.find((ingredient) => ingredient.type === "bun")) {
+                    state.totalPrice -= state.constructorIngredient.find((ingredient) => ingredient.type === "bun").price
                     state.constructorIngredient = state.constructorIngredient.filter((ingredient) => ingredient.type !== 'bun')
                 }
+
                 state.constructorIngredient.push(action.payload);
+                state.totalPrice += action.payload.price;
             },
             prepare: (payload) => {
                 return {
@@ -26,7 +30,8 @@ const constructorSlice = createSlice({
             },
         },
         removeIngredient: (state, action) => {
-            state.constructorIngredient = state.constructorIngredient.filter((ingredient) => ingredient.ingredientId !== action.payload);
+            state.constructorIngredient = state.constructorIngredient.filter((ingredient) => ingredient.ingredientId !== action.payload.ingredientId);
+            state.totalPrice -= action.payload.price;
         },
         sortIngredients: (state, action) => {
             const {indexFrom, indexTo, ingredient} = action.payload;

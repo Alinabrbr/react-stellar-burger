@@ -12,10 +12,13 @@ import {getModalOrderSelector} from "../../services/getModalOrderSelector";
 import {addIngredient, removeIngredient} from "../../services/constructorSlice";
 import {useDrop} from "react-dnd";
 import {constructorSelector} from "../../services/constructorSelector";
+import {totalPriceSelector} from "../../services/totalPriceSelector";
 
 export default function SectionBurgerConstructor() {
 
     const cards = useSelector(constructorSelector);
+
+    const totalPrice = useSelector(totalPriceSelector);
 
     const bun = cards.find(card => card.type === 'bun');
 
@@ -58,7 +61,7 @@ export default function SectionBurgerConstructor() {
                 <div className={clsx(styles.burgerIngredientsContainerScroll, 'mb-4')}>
                     <div className='mr-4'>
                         {cards.map((card, index) => (
-                            (card.type === "main" || card.type ==='sauce') && <BurgerConstructor card={card} index={index} key={card.ingredientId} handleClose={() => deleteIngredient(card.ingredientId)}/>
+                            (card.type === "main" || card.type ==='sauce') && <BurgerConstructor card={card} index={index} key={card.ingredientId} handleClose={() => deleteIngredient(card)}/>
                         ))}
                     </div>
                 </div>
@@ -74,7 +77,7 @@ export default function SectionBurgerConstructor() {
                 </div>
 
                 <div className={clsx(styles.priceContainer, 'mt-10')}>
-                    <Price priceSize={"medium"} price={610}/>
+                    <Price priceSize={"medium"} price={totalPrice}/>
                     <Button onClick={openModal} htmlType="button" type="primary" size="large">Оформить заказ</Button>
                 </div>
             </section>
