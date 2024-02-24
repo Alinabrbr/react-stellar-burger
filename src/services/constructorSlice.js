@@ -13,12 +13,17 @@ const constructorSlice = createSlice({
         addIngredient: {
             reducer: (state, action) => {
                 if (action.payload.type === 'bun' && state.constructorIngredient.find((ingredient) => ingredient.type === "bun")) {
-                    state.totalPrice -= state.constructorIngredient.find((ingredient) => ingredient.type === "bun").price
+                    state.totalPrice -= state.constructorIngredient.find((ingredient) => ingredient.type === "bun").price * 2;
                     state.constructorIngredient = state.constructorIngredient.filter((ingredient) => ingredient.type !== 'bun')
                 }
 
                 state.constructorIngredient.push(action.payload);
-                state.totalPrice += action.payload.price;
+
+                if (action.payload.type === 'bun') {
+                    state.totalPrice += action.payload.price * 2;
+                } else {
+                    state.totalPrice += action.payload.price;
+                }
             },
             prepare: (payload) => {
                 return {
