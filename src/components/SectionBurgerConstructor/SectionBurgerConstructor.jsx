@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import BurgerConstructor from "../Burger-constructor/Burger-Constructor";
 import clsx from "clsx";
 import styles from "../SectionBurgerConstructor/SectionBurgerConstructor.module.css";
@@ -9,10 +9,11 @@ import OrderDetails from "../Order-details/Order-details";
 import {useDispatch, useSelector} from "react-redux";
 import {closePopup, openPopup} from "../../services/orderSlice";
 import {getModalOrderSelector} from "../../services/getModalOrderSelector";
-import {addIngredient, removeIngredient} from "../../services/constructorSlice";
+import {addIngredient, clearStore, removeIngredient} from "../../services/constructorSlice";
 import {useDrop} from "react-dnd";
 import {constructorSelector} from "../../services/constructorSelector";
 import {totalPriceSelector} from "../../services/totalPriceSelector";
+import {fetchOrderResult} from "../../services/orderDetailsSlice";
 
 export default function SectionBurgerConstructor() {
 
@@ -42,6 +43,10 @@ export default function SectionBurgerConstructor() {
 
     const deleteIngredient = (card) => {
         dispatch(removeIngredient(card));
+    }
+
+    const clearStoreBurgerConstructor = () => {
+        dispatch(clearStore());
     }
 
     return (
@@ -78,11 +83,18 @@ export default function SectionBurgerConstructor() {
 
                 <div className={clsx(styles.priceContainer, 'mt-10')}>
                     <Price priceSize={"medium"} price={totalPrice}/>
-                    <Button onClick={openModal} htmlType="button" type="primary" size="large">Оформить заказ</Button>
+                    <Button onClick={() => {
+                        openModal();
+                        dispatch(fetchOrderResult({ingredients: [...cards.map((ingredient) => ingredient._id), bun._id]}));
+                    }}
+                        disabled={cards.length === 0 || !cards.find((item) => item.type === "bun")}
+                            htmlType="button" type="primary" size="large">
+                        Оформить заказ
+                    </Button>
                 </div>
             </section>
 
-            {modalOrderState && <Modal closeModal={closeModal}><OrderDetails/></Modal>}
+            {modalOrderState && <Modal closeModal={() => {closeModal(); clearStoreBurgerConstructor()}}><OrderDetails/></Modal>}
         </>
     )
 }

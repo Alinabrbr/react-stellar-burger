@@ -9,6 +9,7 @@ import cardsReducer from "./services/cardsSlice";
 import popupInfoReducer from "./services/ingredientsInfoSlice";
 import popupOrderReducer from "./services/orderSlice";
 import burgerConstructorReducer from "./services/constructorSlice";
+import orderDetailsReducer from "./services/orderDetailsSlice";
 
 
 export const store = configureStore({
@@ -16,7 +17,8 @@ export const store = configureStore({
         cards: cardsReducer,
         popupInfo: popupInfoReducer,
         popupOrder: popupOrderReducer,
-        burgerConstructor: burgerConstructorReducer
+        burgerConstructor: burgerConstructorReducer,
+        orderDetails: orderDetailsReducer
     }
 })
 

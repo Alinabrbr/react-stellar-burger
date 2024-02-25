@@ -11,7 +11,7 @@ import {getModalInfoSelector} from "../../services/getModalInfoSelector";
 import {closePopup, openPopup} from "../../services/ingredientsInfoSlice";
 import {useDrag} from "react-dnd";
 
-export default function Card({card, priceSize}) {
+export default function Card({card, priceSize, count}) {
 
     const modalState = useSelector(getModalInfoSelector)
     const dispatch = useDispatch();
@@ -33,7 +33,7 @@ export default function Card({card, priceSize}) {
         <>
             <li onClick={openModal} className={clsx(styles.card)} ref={dragRef}>
                 <div className={styles.counter}>
-                    <Counter count={1} size="default"/>
+                    <Counter count={count} size="default"/>
                 </div>
                 <img className='mr-4 ml-4' src={card.image} alt={card.name}/>
                 <Price price={card.price} priceSize={priceSize}></Price>
@@ -47,5 +47,6 @@ export default function Card({card, priceSize}) {
 Card.propTypes = {
     name: PropTypes.string,
     image: PropTypes.string,
-    price: PropTypes.number
+    price: PropTypes.number,
+    count: PropTypes.number
 };

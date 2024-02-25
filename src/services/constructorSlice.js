@@ -42,9 +42,12 @@ const constructorSlice = createSlice({
             const {indexFrom, indexTo, ingredient} = action.payload;
             state.constructorIngredient.splice(indexFrom, 1);
             state.constructorIngredient.splice(indexTo, 0, ingredient);
+        },
+        clearStore: (state) => {
+            state.constructorIngredient = [];
         }
     }
 })
 
 export default constructorSlice.reducer;
-export const {addIngredient, removeIngredient, sortIngredients} = constructorSlice.actions;
+export const {addIngredient, removeIngredient, sortIngredients, clearStore} = constructorSlice.actions;

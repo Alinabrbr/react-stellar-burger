@@ -1,6 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {getCard} from "../utils/Api";
-import {getCards} from "./actions/card";
 
 const initialState = {
     cardsArray: [],
@@ -20,7 +19,7 @@ const cardsSlice = createSlice({
     initialState,
     extraReducers: builder => {
         builder
-            .addCase(takeCards.pending.type, (state, action) => {
+            .addCase(takeCards.pending.type, state => {
                 state.isLoading = true;
                 state.error = '';
             })
@@ -36,4 +35,4 @@ const cardsSlice = createSlice({
 })
 
 export default cardsSlice.reducer;
-export const {cardsLoaded, cardsUploading, cardsLoadError} = cardsSlice.actions;
+// export const {cardsLoaded, cardsUploading, cardsLoadError} = cardsSlice.actions;
