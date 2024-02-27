@@ -1,8 +1,10 @@
+import checkResponse from "./checkResponse";
+
 const urlApi = "https://norma.nomoreparties.space/api";
 
 export const getCard = () => {
     return fetch(`${urlApi}/ingredients`)
-        .then((res) => res.ok ? res.json() : Promise.reject(new Error('Отклонено')));
+        .then(checkResponse);
 }
 
 export const postOrderRequest = (ingredients) => {
@@ -13,5 +15,5 @@ export const postOrderRequest = (ingredients) => {
             "Content-Type": 'application/json',
         },
     })
-    .then((res) => res.ok ? res.json() : Promise.reject(new Error('Отклонено')));
+    .then(checkResponse);
 }

@@ -7,7 +7,7 @@ const initialState = {
     error: ''
 };
 
-export const takeCards = createAsyncThunk(
+export const getIngredients = createAsyncThunk(
     'cardsGet',
     async () => {
         return await getCard().then((data) => data.data);
@@ -19,15 +19,15 @@ const cardsSlice = createSlice({
     initialState,
     extraReducers: builder => {
         builder
-            .addCase(takeCards.pending.type, state => {
+            .addCase(getIngredients.pending.type, state => {
                 state.isLoading = true;
                 state.error = '';
             })
-            .addCase(takeCards.fulfilled.type, (state, action) => {
+            .addCase(getIngredients.fulfilled.type, (state, action) => {
                 state.cardsArray = action.payload;
                 state.isLoading = false;
             })
-            .addCase(takeCards.rejected.type, (state, action) => {
+            .addCase(getIngredients.rejected.type, (state, action) => {
                 state.error = action.payload;
                 state.isLoading = false;
             })
@@ -35,4 +35,3 @@ const cardsSlice = createSlice({
 })
 
 export default cardsSlice.reducer;
-// export const {cardsLoaded, cardsUploading, cardsLoadError} = cardsSlice.actions;

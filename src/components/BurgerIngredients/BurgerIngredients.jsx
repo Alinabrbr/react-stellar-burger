@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import styles from "../SectionBurgerIngredients/SectionBurgerIngredients.module.css";
+import styles from "./BurgerIngredients.module.css";
 import Container from "../Container/Container";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import Card from "../Card/Card";
@@ -9,7 +9,7 @@ import {getCards} from "../../services/cardsSelector";
 import {constructorSelector} from "../../services/constructorSelector";
 import {useInView} from "react-intersection-observer";
 
-export default function SectionBurgerIngredients() {
+export default function BurgerIngredients() {
 
     const cards = useSelector(getCards);
     const burgerConstructor = useSelector(constructorSelector);
