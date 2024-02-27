@@ -42,7 +42,7 @@ IngredientDetails.propTypes = {
     image_large: PropTypes.string,
     name: PropTypes.string,
     calories: PropTypes.number,
-    proteins: PropTypes.string,
-    fat: PropTypes.string,
-    carbohydrates: PropTypes.string
+    proteins: PropTypes.number,
+    fat: PropTypes.number,
+    carbohydrates: PropTypes.number
 };
