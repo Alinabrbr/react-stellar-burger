@@ -45,6 +45,7 @@ const constructorSlice = createSlice({
         },
         clearStore: (state) => {
             state.constructorIngredient = [];
+            state.totalPrice = 0;
         }
     }
 })

@@ -1,14 +1,14 @@
 import React from "react";
 import clsx from "clsx";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "../Burger-constructor/Burger-constructor.module.css";
+import styles from "./ConstructorElementBun.module.css";
 import PropTypes from 'prop-types';
 import {useDrag, useDrop} from "react-dnd";
 import {useDispatch, useSelector} from "react-redux";
 import {constructorSelector} from "../../services/constructorSelector";
 import {sortIngredients} from "../../services/constructorSlice";
 
-export default function BurgerConstructor({card, index, handleClose}) {
+export default function ConstructorElementBun({card, index, handleClose}) {
 
     const burgerConstructor = useSelector(constructorSelector);
     const dispatch = useDispatch();
@@ -41,7 +41,7 @@ export default function BurgerConstructor({card, index, handleClose}) {
     const transition = isDragging ? 'all .6s' : '';
 
     return (
-        <div className={clsx(styles.burgerContainer, 'mt-4 ml-4')} ref={node => dragRef(dropRef(node))} style={{ opacity, transition }}>
+        <div className={clsx(styles.ConstructorElementBunContainer, 'mt-4 ml-4')} ref={node => dragRef(dropRef(node))} style={{ opacity, transition }}>
             <DragIcon type="primary"/>
             <ConstructorElement text={card.name} isLocked={card.isLocked} thumbnail={card.image} price={card.price}
                                 handleClose={handleClose}/>
@@ -49,7 +49,7 @@ export default function BurgerConstructor({card, index, handleClose}) {
     )
 }
 
-BurgerConstructor.propTypes = {
+ConstructorElementBun.propTypes = {
     name: PropTypes.string,
     isLocked: PropTypes.bool,
     image: PropTypes.string,

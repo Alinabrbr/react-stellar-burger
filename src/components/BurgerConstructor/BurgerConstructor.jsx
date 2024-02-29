@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
-import BurgerConstructor from "../Burger-constructor/Burger-Constructor";
+import React from "react";
+import ConstructorElementBun from "../ConstructorElementBun/ConstructorElementBun";
 import clsx from "clsx";
-import styles from "../SectionBurgerConstructor/SectionBurgerConstructor.module.css";
+import styles from "./BurgerConstructor.module.css";
 import Price from "../Price/Price";
 import {Button, ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../Modal/Modal";
@@ -15,7 +15,7 @@ import {constructorSelector} from "../../services/constructorSelector";
 import {totalPriceSelector} from "../../services/totalPriceSelector";
 import {fetchOrderResult} from "../../services/orderDetailsSlice";
 
-export default function SectionBurgerConstructor() {
+export default function BurgerConstructor() {
 
     const cards = useSelector(constructorSelector);
 
@@ -66,7 +66,7 @@ export default function SectionBurgerConstructor() {
                 <div className={clsx(styles.burgerIngredientsContainerScroll, 'mb-4')}>
                     <div className='mr-4'>
                         {cards.map((card, index) => (
-                            (card.type === "main" || card.type ==='sauce') && <BurgerConstructor card={card} index={index} key={card.ingredientId} handleClose={() => deleteIngredient(card)}/>
+                            (card.type === "main" || card.type ==='sauce') && <ConstructorElementBun card={card} index={index} key={card.ingredientId} handleClose={() => deleteIngredient(card)}/>
                         ))}
                     </div>
                 </div>
