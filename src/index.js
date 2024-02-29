@@ -10,6 +10,7 @@ import popupInfoReducer from "./services/ingredientsInfoSlice";
 import popupOrderReducer from "./services/orderSlice";
 import burgerConstructorReducer from "./services/constructorSlice";
 import orderDetailsReducer from "./services/orderDetailsSlice";
+import {BrowserRouter} from "react-router-dom";
 
 
 export const store = configureStore({
@@ -23,11 +24,13 @@ export const store = configureStore({
 })
 
 ReactDOM.render(
-    <React.StrictMode>
-        <Provider store={store}>
-        <App/>
-        </Provider>
-    </React.StrictMode>,
+        <React.StrictMode>
+            <Provider store={store}>
+                <BrowserRouter>
+                <App/>
+                </BrowserRouter>
+            </Provider>
+        </React.StrictMode>,
     document.getElementById("root")
 );
 
