@@ -1,5 +1,6 @@
 import React from "react";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Link} from "react-router-dom";
 
 export default function ResetPassword () {
     return (
@@ -12,9 +13,9 @@ export default function ResetPassword () {
                     Сохранить
                 </Button>
                 <p>Вспомнили пароль?</p>
-                <Button htmlType="button" type="secondary" size="small">
+                <Link to='/login'>
                     Войти
-                </Button>
+                </Link>
             </form>
         </div>
     )

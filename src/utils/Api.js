@@ -2,7 +2,7 @@ import checkResponse from "./checkResponse";
 
 const urlApi = "https://norma.nomoreparties.space/api";
 
-export const getCard = () => {
+export const fetchCard = () => {
     return fetch(`${urlApi}/ingredients`)
         .then(checkResponse);
 }
@@ -17,3 +17,4 @@ export const postOrderRequest = (ingredients) => {
     })
     .then(checkResponse);
 }
+

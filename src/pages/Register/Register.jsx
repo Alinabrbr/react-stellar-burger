@@ -1,21 +1,52 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Link, Navigate} from "react-router-dom";
+import {fetchRegisterProfileResult} from "../../services/registerSlice";
+import {useDispatch, useSelector} from "react-redux";
 
-export default function Register () {
+export default function Register() {
+    const dispatch = useDispatch()
+
+    const auth = useSelector((state) => state.accessToken.accessToken);
+    const refreshToken = useSelector((state) => state.accessToken.refreshToken);
+    const isLoading = useSelector((state) => state.accessToken.isLoading);
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    function registerProfile(event) {
+        event.preventDefault();
+        dispatch(fetchRegisterProfileResult({name: name, email: email, password: password}));
+
+        setName('');
+        setEmail('');
+        setPassword('');
+    }
+
+    if (auth) {
+        return (
+            <Navigate to={'/'} />
+        )
+    }
+
     return (
         <div>
             <h2>Регистрация</h2>
-            <form>
-                <Input type={'text'} placeholder={'Имя'}/>
-                <Input type={'email'} placeholder={'E-mail'}/>
-                <Input type={'password'} placeholder={'Пароль'}/>
+            <form onSubmit={registerProfile}>
+                <Input type='text' id='name' placeholder='Имя' value={name}
+                       onChange={(event) => setName(event.target.value)}/>
+                <Input type='email' id='email' placeholder='E-mail' value={email}
+                       onChange={(event) => setEmail(event.target.value)}/>
+                <Input type='password' id='password' placeholder='Пароль' value={password}
+                       onChange={(event) => setPassword(event.target.value)}/>
                 <Button htmlType="submit" type="primary" size="small" extraClass="ml-2">
                     Зарегистрироваться
                 </Button>
                 <p>Уже зарегистрированы?</p>
-                <Button htmlType="button" type="secondary" size="small">
+                <Link to='/login'>
                     Войти
-                </Button>
+                </Link>
             </form>
         </div>
     )

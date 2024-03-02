@@ -29,7 +29,7 @@
   justify-content: flex-end;
 }
 
-a:-webkit-any-link {
+form a:-webkit-any-link {
   text-decoration: none;
   color: #F2F2F3;
 }

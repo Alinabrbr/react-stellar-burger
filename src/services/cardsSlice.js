@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {getCard} from "../utils/Api";
+import {fetchCard} from "../utils/Api";
 
 const initialState = {
     cardsArray: [],
@@ -10,7 +10,7 @@ const initialState = {
 export const getIngredients = createAsyncThunk(
     'cardsGet',
     async () => {
-        return await getCard().then((data) => data.data);
+        return await fetchCard().then((data) => data.data);
     }
 )
 

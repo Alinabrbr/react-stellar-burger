@@ -1,11 +1,20 @@
 import React from "react";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import NavBar from "../../components/Nav-bar/Nav-bar";
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import styles from "../Profile/Profile.module.css"
 import clsx from "clsx";
+import {useSelector} from "react-redux";
 
 export default function Profile () {
+    const auth = useSelector((state) => state.accessToken.accessToken);
+
+    if (!auth) {
+        return (
+            <Navigate to={'/login'} />
+        )
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.profile}>

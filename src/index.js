@@ -10,6 +10,7 @@ import popupInfoReducer from "./services/ingredientsInfoSlice";
 import popupOrderReducer from "./services/orderSlice";
 import burgerConstructorReducer from "./services/constructorSlice";
 import orderDetailsReducer from "./services/orderDetailsSlice";
+import registerReducer from "./services/registerSlice";
 import {BrowserRouter} from "react-router-dom";
 
 
@@ -19,7 +20,8 @@ export const store = configureStore({
         popupInfo: popupInfoReducer,
         popupOrder: popupOrderReducer,
         burgerConstructor: burgerConstructorReducer,
-        orderDetails: orderDetailsReducer
+        orderDetails: orderDetailsReducer,
+        accessToken: registerReducer,
     }
 })
 

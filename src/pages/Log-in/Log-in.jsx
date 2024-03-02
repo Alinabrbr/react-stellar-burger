@@ -1,5 +1,6 @@
 import React from "react";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Link} from "react-router-dom";
 
 export default function LogIn () {
     return (
@@ -14,16 +15,16 @@ export default function LogIn () {
 
                 <div>
                     <p>Вы - новый пользователь?</p>
-                    <Button htmlType="button" type="secondary" size="small">
+                    <Link to='/register'>
                         Зарегистрироваться
-                    </Button>
+                    </Link>
                 </div>
 
                 <div>
                     <p>Забыли пароль?</p>
-                    <Button htmlType="button" type="secondary" size="small">
+                    <Link to='/forgot-password'>
                         Восстановить пароль
-                    </Button>
+                    </Link>
                 </div>
 
             </form>

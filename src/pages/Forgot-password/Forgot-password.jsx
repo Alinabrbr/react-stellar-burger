@@ -1,5 +1,16 @@
 import React from "react";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Link} from "react-router-dom";
+import {createAsyncThunk} from "@reduxjs/toolkit";
+// import {postOrderRequest, postResetPasswordRequest} from "../../utils/Api";
+
+
+// export const fetchResetPasswordResult = createAsyncThunk(
+//     `orderDetails/fetchOrderResult`,
+//     async (email) => {
+//         return await postResetPasswordRequest(email);
+//     }
+// );
 
 export default function ForgotPassword () {
     return (
@@ -11,9 +22,10 @@ export default function ForgotPassword () {
                     Восстановить
                 </Button>
                 <p>Вспомнили пароль?</p>
-                <Button htmlType="button" type="secondary" size="small">
+                <Link to='/login'>
                     Войти
-                </Button>
+                </Link>
+                {/*onClick={postResetPasswordRequest(email)*/}
             </form>
         </div>
     )
