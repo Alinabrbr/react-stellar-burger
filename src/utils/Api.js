@@ -1,6 +1,6 @@
 import checkResponse from "./checkResponse";
 
-const urlApi = "https://norma.nomoreparties.space/api";
+export const urlApi = "https://norma.nomoreparties.space/api";
 
 export const fetchCard = () => {
     return fetch(`${urlApi}/ingredients`)

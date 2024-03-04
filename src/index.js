@@ -10,8 +10,12 @@ import popupInfoReducer from "./services/ingredientsInfoSlice";
 import popupOrderReducer from "./services/orderSlice";
 import burgerConstructorReducer from "./services/constructorSlice";
 import orderDetailsReducer from "./services/orderDetailsSlice";
-import registerReducer from "./services/registerSlice";
+import registerReducer from "./services/registerAndAuthorizationSlice";
 import {BrowserRouter} from "react-router-dom";
+import forgotPasswordReducer from "./services/forgotPasswordSlice";
+import resetPasswordReducer from "./services/resetPasswordSlice";
+import logoutReducer from "./services/logoutSlice";
+import profileInfoReducer from "./services/getInfoProfileSlice";
 
 
 export const store = configureStore({
@@ -22,6 +26,10 @@ export const store = configureStore({
         burgerConstructor: burgerConstructorReducer,
         orderDetails: orderDetailsReducer,
         accessToken: registerReducer,
+        successForgotPassword: forgotPasswordReducer,
+        successResetPassword: resetPasswordReducer,
+        messageLogout: logoutReducer,
+        profileInfo: profileInfoReducer
     }
 })
 

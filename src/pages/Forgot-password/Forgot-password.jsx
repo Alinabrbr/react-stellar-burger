@@ -1,23 +1,33 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link} from "react-router-dom";
-import {createAsyncThunk} from "@reduxjs/toolkit";
-// import {postOrderRequest, postResetPasswordRequest} from "../../utils/Api";
+import {Link, Navigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchForgotPasswordResult} from "../../services/forgotPasswordSlice";
 
+export default function ForgotPassword() {
+    const dispatch = useDispatch()
 
-// export const fetchResetPasswordResult = createAsyncThunk(
-//     `orderDetails/fetchOrderResult`,
-//     async (email) => {
-//         return await postResetPasswordRequest(email);
-//     }
-// );
+    const successForgot = useSelector((state) => state.successForgotPassword.success);
 
-export default function ForgotPassword () {
+    const [email, setEmail] = useState('')
+
+    function forgotPassword(event) {
+        event.preventDefault();
+        dispatch(fetchForgotPasswordResult({email: email}));
+    }
+
+    if (successForgot) {
+        return (
+            <Navigate to={'/reset-password'} />
+        )
+    }
+
     return (
         <div>
             <h2>Восстановление пароля</h2>
-            <form>
-                <Input type={'email'} placeholder={'Укажите e-mail'}/>
+            <form onSubmit={forgotPassword}>
+                <Input type={'email'} placeholder={'Укажите e-mail'} value={email}
+                       onChange={(event) => setEmail(event.target.value)}/>
                 <Button htmlType="submit" type="primary" size="small" extraClass="ml-2">
                     Восстановить
                 </Button>
@@ -25,7 +35,6 @@ export default function ForgotPassword () {
                 <Link to='/login'>
                     Войти
                 </Link>
-                {/*onClick={postResetPasswordRequest(email)*/}
             </form>
         </div>
     )

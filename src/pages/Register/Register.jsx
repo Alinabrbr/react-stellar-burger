@@ -1,15 +1,13 @@
 import React, {useState} from "react";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, Navigate} from "react-router-dom";
-import {fetchRegisterProfileResult} from "../../services/registerSlice";
+import {fetchRegisterProfileResult} from "../../services/registerAndAuthorizationSlice";
 import {useDispatch, useSelector} from "react-redux";
 
 export default function Register() {
     const dispatch = useDispatch()
 
     const auth = useSelector((state) => state.accessToken.accessToken);
-    const refreshToken = useSelector((state) => state.accessToken.refreshToken);
-    const isLoading = useSelector((state) => state.accessToken.isLoading);
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')

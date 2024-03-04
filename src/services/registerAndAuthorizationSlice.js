@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {postRegisterProfileRequest} from "../utils/auth";
+import {postLoginRequest, postRegisterProfileRequest} from "../utils/auth";
 
 const initialState = {
     isLoading: "",
@@ -15,9 +15,21 @@ export const fetchRegisterProfileResult = createAsyncThunk(
     }
 );
 
+export const fetchLoginResult = createAsyncThunk(
+    `login/fetchAccessTokenResult`,
+    async (email, password) => {
+        return await postLoginRequest(email, password).then((data) => data);
+    }
+);
+
 const Register = createSlice({
-    name: 'orderPopup',
+    name: 'register',
     initialState,
+    reducers: {
+        clearAccessToken: (state) => {
+            state.accessToken = null;
+        }
+    },
     extraReducers: builder => {
         builder
             .addCase(fetchRegisterProfileResult.pending.type, state => {
@@ -34,8 +46,22 @@ const Register = createSlice({
                 state.error = action.payload;
                 state.isLoading = false;
             })
+            .addCase(fetchLoginResult.pending.type, state => {
+                state.isLoading = true;
+                state.error = '';
+            })
+            .addCase(fetchLoginResult.fulfilled.type, (state, action) => {
+                state.accessToken = action.payload.accessToken;
+                state.refreshToken = action.payload.refreshToken;
+                state.isLoading = false;
+                localStorage.setItem('refreshToken', action.payload.refreshToken);
+            })
+            .addCase(fetchLoginResult.rejected.type, (state, action) => {
+                state.error = action.payload;
+                state.isLoading = false;
+            })
     }
 })
 
 export default Register.reducer;
-// export const {openPopup, closePopup} = orderPopupSlice.actions;
+export const {clearAccessToken} = Register.actions;
