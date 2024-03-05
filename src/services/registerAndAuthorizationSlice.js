@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {postLoginRequest, postRegisterProfileRequest} from "../utils/auth";
+import {getRefreshTokenRequest} from "../utils/token";
 
 const initialState = {
     isLoading: "",
@@ -19,6 +20,13 @@ export const fetchLoginResult = createAsyncThunk(
     `login/fetchAccessTokenResult`,
     async (email, password) => {
         return await postLoginRequest(email, password).then((data) => data);
+    }
+);
+
+export const fetchRefreshTokenResult = createAsyncThunk(
+    `token/fetchRefreshTokenResult`,
+    async (token) => {
+        return await getRefreshTokenRequest(token).then((data) => data);
     }
 );
 
@@ -58,6 +66,19 @@ const Register = createSlice({
             })
             .addCase(fetchLoginResult.rejected.type, (state, action) => {
                 state.error = action.payload;
+                state.isLoading = false;
+            })
+            .addCase(fetchRefreshTokenResult.pending.type, state => {
+                state.isLoading = true;
+                state.error = '';
+            })
+            .addCase(fetchRefreshTokenResult.fulfilled.type, (state, action) => {
+                state.accessToken = action.payload.accessToken;
+                state.refreshToken = action.payload.refreshToken;
+                state.isLoading = false;
+                localStorage.setItem('refreshToken', action.payload.refreshToken);
+            })
+            .addCase(fetchRefreshTokenResult.rejected.type, (state, action) => {
                 state.isLoading = false;
             })
     }

@@ -1,8 +1,10 @@
 import React, {useState} from "react";
-import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, Navigate} from "react-router-dom";
 import {fetchRegisterProfileResult} from "../../services/registerAndAuthorizationSlice";
 import {useDispatch, useSelector} from "react-redux";
+import clsx from "clsx";
+import styles from "../Register/Register.module.css";
 
 export default function Register() {
     const dispatch = useDispatch()
@@ -29,23 +31,38 @@ export default function Register() {
     }
 
     return (
-        <div>
-            <h2>Регистрация</h2>
-            <form onSubmit={registerProfile}>
+        <div className={styles.formContainer}>
+
+            <h2 className={"text_type_main-medium mb-6"}>Регистрация</h2>
+
+            <form className={styles.form} onSubmit={registerProfile}>
+
                 <Input type='text' id='name' placeholder='Имя' value={name}
                        onChange={(event) => setName(event.target.value)}/>
-                <Input type='email' id='email' placeholder='E-mail' value={email}
+
+                <EmailInput type='email' id='email' placeholder='E-mail' value={email}
                        onChange={(event) => setEmail(event.target.value)}/>
-                <Input type='password' id='password' placeholder='Пароль' value={password}
+
+                <PasswordInput type='password' id='password' placeholder='Пароль' value={password}
                        onChange={(event) => setPassword(event.target.value)}/>
-                <Button htmlType="submit" type="primary" size="small" extraClass="ml-2">
-                    Зарегистрироваться
-                </Button>
-                <p>Уже зарегистрированы?</p>
-                <Link to='/login'>
-                    Войти
-                </Link>
+
+
+                <div className={styles.buttonContainer}>
+                    <Button htmlType="submit" type="primary" size="small" extraClass="ml-2">
+                        <p className={'text_type_main-default'}>Зарегистрироваться</p>
+                    </Button>
+                </div>
+
+                    <div className={styles.textContainer}>
+                        <p className={clsx(styles.text, 'text_type_main-default')}>Уже зарегистрированы?</p>
+
+                        <Link to='/login'>
+                            <Button htmlType="button" type="secondary" size="medium">
+                                Войти
+                            </Button>
+                        </Link>
+                    </div>
             </form>
         </div>
-    )
+)
 }

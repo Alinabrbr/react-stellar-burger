@@ -1,7 +1,7 @@
 import checkResponse from "./checkResponse";
 import {urlApiAuth} from "./auth";
 
-export const refreshTokenRequest = (token) => {
+export const getRefreshTokenRequest = (token) => {
     return fetch(`${urlApiAuth}/token`, {
         method: "POST",
         body: JSON.stringify(token),

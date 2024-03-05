@@ -51,9 +51,21 @@ export const postLoginRequest = ({email, password}) => {
 export const getInfoProfileRequest = (token) => {
     return fetch(`${urlApiAuth}/user`, {
         method: "GET",
-        body: JSON.stringify(token),
         headers: {
             "Content-Type": 'application/json',
+            "Authorization": token,
+        },
+    })
+        .then(checkResponse);
+}
+
+export const getEditInfoProfileRequest = ({token, name, email, password}) => {
+    return fetch(`${urlApiAuth}/user`, {
+        method: "PATCH",
+        body: JSON.stringify({token, name, email, password}),
+        headers: {
+            "Content-Type": 'application/json',
+            "Authorization": token,
         },
     })
         .then(checkResponse);

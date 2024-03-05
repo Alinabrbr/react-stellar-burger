@@ -1,10 +1,12 @@
 import React, {useState} from "react";
-import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Button, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, Navigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchResetPasswordResult} from "../../services/resetPasswordSlice";
+import styles from "../Register/Register.module.css";
+import clsx from "clsx";
 
-export default function ResetPassword () {
+export default function ResetPassword() {
     const dispatch = useDispatch()
 
     const [password, setPassword] = useState('')
@@ -22,25 +24,36 @@ export default function ResetPassword () {
 
     if (successReset) {
         return (
-            <Navigate to={'/login'} />
+            <Navigate to={'/login'}/>
         )
     }
 
     return (
-        <div>
-            <h2>Восстановление пароля</h2>
-            <form onSubmit={resetPassword}>
-                <Input type={'password'} placeholder={'Введите новый пароль'} value={password}
-                       onChange={(event) => setPassword(event.target.value)}/>
+        <div className={styles.formContainer}>
+
+            <h2 className={"text_type_main-medium mb-6"}>Восстановление пароля</h2>
+
+            <form className={styles.form} onSubmit={resetPassword}>
+                <PasswordInput type={'password'} placeholder={'Введите новый пароль'} value={password}
+                               onChange={(event) => setPassword(event.target.value)}/>
                 <Input type={'text'} placeholder={'Введите код из письма'} value={token}
                        onChange={(event) => setToken(event.target.value)}/>
-                <Button htmlType="submit" type="primary" size="small" extraClass="ml-2">
-                    Сохранить
-                </Button>
-                <p>Вспомнили пароль?</p>
-                <Link to='/login'>
-                    Войти
-                </Link>
+
+                <div className={styles.buttonContainer}>
+                    <Button htmlType="submit" type="primary" size="small" extraClass="ml-2">
+                        <p className={'text_type_main-default'}>Сохранить</p>
+                    </Button>
+                </div>
+
+                <div className={styles.textContainer}>
+                    <p className={clsx(styles.text, 'text_type_main-default')}>Вспомнили пароль?</p>
+                    <Link to='/login'>
+                        <Button htmlType="button" type="secondary" size="medium">
+                            Войти
+                        </Button>
+                    </Link>
+                </div>
+
             </form>
         </div>
     )

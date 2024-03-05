@@ -7,6 +7,10 @@
   color: #8585AD;
 }
 
+.textOpacity {
+  opacity: 0.4;
+}
+
 .profile {
   display: flex;
   margin-left: 20px;
@@ -29,7 +33,18 @@
   justify-content: flex-end;
 }
 
-form a:-webkit-any-link {
+nav a:-webkit-any-link {
   text-decoration: none;
+}
+
+.active {
   color: #F2F2F3;
+}
+
+.inactive {
+  color: #8585AD;
+}
+
+.input::placeholder {
+  color: #8585AD;
 }
