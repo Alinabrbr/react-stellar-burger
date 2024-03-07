@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Navigate, NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import styles from "../Profile/Profile.module.css"
 import clsx from "clsx";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchLogoutResult} from "../../services/logoutSlice";
-import {clearAccessToken, fetchRefreshTokenResult} from "../../services/registerAndAuthorizationSlice";
+import {clearAccessToken} from "../../services/registerAndAuthorizationSlice";
 import {fetchEditInfoProfileResult, fetchInfoProfileResult} from "../../services/getInfoProfileSlice";
 
 
@@ -16,12 +16,6 @@ export default function Profile() {
     const dispatch = useDispatch();
     const accessToken = useSelector((state) => state.accessToken.accessToken);
     const refreshToken = localStorage.getItem("refreshToken");
-
-    useEffect(() => {
-        if (!accessToken && refreshToken) {
-            dispatch(fetchRefreshTokenResult({token: refreshToken}));
-        }
-    }, [dispatch])
 
     const profileInfo = useSelector((state) => state.profileInfo);
 
@@ -60,7 +54,6 @@ export default function Profile() {
 
     function editProfile(event) {
         event.preventDefault();
-        console.log(form);
         dispatch(fetchEditInfoProfileResult({
             token: accessToken,
             name: form.name,
@@ -84,12 +77,6 @@ export default function Profile() {
             [event.target.name]: event.target.value
         });
     };
-
-    if (!accessToken && !refreshToken) {
-        return (
-            <Navigate to={'/login'}/>
-        )
-    }
 
     const onIconClick = (event) => {
         event.target.parentElement.disabled = false;
@@ -119,15 +106,17 @@ export default function Profile() {
 
 
                 {profileInfo.isLoading ?
+
                     <h1 className={clsx(styles.text, 'text_type_main-medium')}>Данные загружаются...</h1>
-                    : <form className={styles.profileInfo} onSubmit={editProfile}>
+
+                    : <form className={styles.profileInfo} onSubmit={(e) => editProfile(e)}>
                         <Input extraClass={styles.input} name="name" type={'text'} placeholder={'Имя'} value={form.name}
                                onChange={updateInput}
                                icon="EditIcon"
                                onIconClick={e => {
                                    onIconClick(e)
                                }}
-                               disabled={true}
+                               disabled={profileInfo.isLoading}
                         />
                         <Input name="email" type={'text'} placeholder={'Логин'} value={form.email}
                                onChange={updateInput}
@@ -144,7 +133,7 @@ export default function Profile() {
                             <Button htmlType="button" type="secondary" size="medium" onClick={editCancel}>
                                 Отмена
                             </Button>
-                            <Button htmlType="button" type="primary" size="medium" extraClass="ml-2">
+                            <Button htmlType="submit" type="primary" size="medium" extraClass="ml-2">
                                 Сохранить
                             </Button>
                         </div>

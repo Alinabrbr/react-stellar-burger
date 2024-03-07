@@ -13,8 +13,10 @@ import {HTML5Backend} from "react-dnd-html5-backend";
 import {DndProvider} from "react-dnd";
 import ForgotPassword from "../../pages/Forgot-password/Forgot-password";
 import ResetPassword from "../../pages/Reset-password/Reset-password";
-import Modal from "../Modal/Modal";
 import {getCards} from "../../services/cardsSelector";
+import IngredientDetails from "../Ingredient-details/Ingredient-details";
+import Modal from "../Modal/Modal";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
 
@@ -32,21 +34,28 @@ function App() {
     return (
         <DndProvider backend={HTML5Backend}>
             <div className={styles.app}>
-                <Routes>
+                <Routes location={background || location}>
                     <Route path="/" element={<LayoutHeader/>}>
                         <Route index element={<Constructor/>}/>
-                        <Route path="login" element={<LogIn/>}/>
-                        <Route path="register" element={<Register/>}/>
-                        <Route path="forgot-password" element={<ForgotPassword/>}/>
-                        <Route path="reset-password" element={<ResetPassword/>}/>
-                        <Route path="profile" element={<Profile/>}/>
-                        <Route path="ingredients/:id" element={<Modal cards={cards}/>}/>
+                        <Route path="login" element={<ProtectedRoute unauthOnly={true}><LogIn/></ProtectedRoute>}/>
+                        <Route path="register" element={<ProtectedRoute unauthOnly={true}><Register/></ProtectedRoute>}/>
+                        <Route path="forgot-password" element={<ProtectedRoute unauthOnly={true}><ForgotPassword/></ProtectedRoute>}/>
+                        <Route path="reset-password" element={<ProtectedRoute unauthOnly={true}><ResetPassword/></ProtectedRoute>}/>
+                        <Route path="profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
+                        <Route path="ingredients/:id" element={<IngredientDetails cards={cards}/>}/>
                         <Route path="*" element={<NotFound/>}/>
                     </Route>
                 </Routes>
                 {background && (
                     <Routes>
-                        <Route path="ingredients/:id" element={<Modal cards={cards} />} />
+                        <Route
+                            path="/ingredients/:id"
+                            element={
+                                <Modal>
+                                    <IngredientDetails cards={cards}/>
+                                </Modal>
+                            }
+                        />
                     </Routes>
                 )}
             </div>

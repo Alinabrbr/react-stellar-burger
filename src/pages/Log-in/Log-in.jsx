@@ -7,7 +7,6 @@ import {fetchLoginResult} from "../../services/registerAndAuthorizationSlice";
 import clsx from "clsx";
 
 export default function LogIn () {
-
     const dispatch = useDispatch()
 
     const auth = useSelector((state) => state.accessToken.accessToken);
@@ -21,7 +20,6 @@ export default function LogIn () {
 
         setEmail('');
         setPassword('');
-
     }
 
     if (auth) {
