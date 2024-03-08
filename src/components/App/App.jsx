@@ -3,7 +3,7 @@ import styles from "./App.module.css";
 import LayoutHeader from "../Layout-header/Layout-header";
 import {useDispatch, useSelector} from "react-redux";
 import {getIngredients} from "../../services/cardsSlice";
-import {Route, Routes, useLocation} from "react-router-dom";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import Profile from "../../pages/Profile/Profile";
 import LogIn from "../../pages/Log-in/Log-in";
 import Register from "../../pages/Register/Register";
@@ -21,12 +21,19 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 function App() {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getIngredients());
     }, [dispatch]);
 
     const cards = useSelector(getCards);
+
+    const closeModal = () => {
+        return (
+            navigate("/")
+        )
+    }
 
     const location = useLocation();
     const background = location.state && location.state.background;
@@ -51,7 +58,7 @@ function App() {
                         <Route
                             path="/ingredients/:id"
                             element={
-                                <Modal>
+                                <Modal closeModal={closeModal}>
                                     <IngredientDetails cards={cards}/>
                                 </Modal>
                             }

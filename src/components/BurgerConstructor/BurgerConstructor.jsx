@@ -35,8 +35,13 @@ export default function BurgerConstructor() {
     };
 
     const closeModal = () => {
-        dispatch(closePopup())
+        dispatch(closePopup());
+        clearStoreBurgerConstructor();
     };
+
+    const clearStoreBurgerConstructor = () => {
+        dispatch(clearStore());
+    }
 
     const [, dropRef] = useDrop({
         accept: "ingredient",
@@ -47,10 +52,6 @@ export default function BurgerConstructor() {
 
     const deleteIngredient = (card) => {
         dispatch(removeIngredient(card));
-    }
-
-    const clearStoreBurgerConstructor = () => {
-        dispatch(clearStore());
     }
 
     return (
@@ -103,7 +104,7 @@ export default function BurgerConstructor() {
                 </div>
             </section>
 
-            {modalOrderState && <Modal closeModal={() => {closeModal(); clearStoreBurgerConstructor()}}><OrderDetails/></Modal>}
+            {modalOrderState && <Modal closeModal={closeModal}><OrderDetails/></Modal>}
         </>
     )
 }
