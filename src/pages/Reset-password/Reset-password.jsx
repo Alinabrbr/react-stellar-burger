@@ -1,18 +1,26 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link, Navigate} from "react-router-dom";
+import {Link, Navigate, useLocation, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchResetPasswordResult} from "../../services/resetPasswordSlice";
 import styles from "../Register/Register.module.css";
 import clsx from "clsx";
 
 export default function ResetPassword() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const [password, setPassword] = useState('')
     const [token, setToken] = useState('')
 
     const successReset = useSelector((state) => state.successResetPassword.success);
+
+    useEffect(() => {
+        if (!location.state?.fromForgotPassword) {
+            navigate("/");
+        }
+    }, [location, navigate]);
 
     function resetPassword(event) {
         event.preventDefault();

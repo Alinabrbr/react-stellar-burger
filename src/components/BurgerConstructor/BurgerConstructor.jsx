@@ -14,6 +14,7 @@ import {useDrop} from "react-dnd";
 import {constructorSelector} from "../../services/constructorSelector";
 import {totalPriceSelector} from "../../services/totalPriceSelector";
 import {fetchOrderResult} from "../../services/orderDetailsSlice";
+import {useNavigate} from "react-router-dom";
 
 export default function BurgerConstructor() {
 
@@ -25,6 +26,9 @@ export default function BurgerConstructor() {
 
     const modalOrderState = useSelector(getModalOrderSelector)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const accessToken = useSelector((state) => state.accessToken.accessToken);
 
     const openModal = () => {
         dispatch(openPopup())
@@ -84,10 +88,15 @@ export default function BurgerConstructor() {
                 <div className={clsx(styles.priceContainer, 'mt-10')}>
                     <Price priceSize={"medium"} price={totalPrice}/>
                     <Button onClick={() => {
+                        if (!accessToken) {
+                            return (
+                                navigate("/login")
+                            )
+                        }
                         openModal();
                         dispatch(fetchOrderResult({ingredients: [...cards.map((ingredient) => ingredient._id), bun._id]}));
                     }}
-                        disabled={cards.length === 0 || !cards.find((item) => item.type === "bun")}
+                            disabled={cards.length === 0 || !cards.find((item) => item.type === "bun")}
                             htmlType="button" type="primary" size="large">
                         Оформить заказ
                     </Button>

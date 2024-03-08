@@ -26,8 +26,10 @@ export default function IngredientDetails() {
     return (
         <>
             <div className={styles.container}>
-                <h2 className='text_type_main-large title'>Детали ингредиента</h2>
-                <img src={el.image_large} alt={el.name}/>
+                <div className={styles.titleContainer}>
+                    <h2 className='text_type_main-large title'>Детали ингредиента</h2>
+                    <img src={el.image_large} alt={el.name}/>
+                </div>
                 <div className={styles.infoContainer}>
                     <p className='text_type_main-medium mt-4 mb-8'>{el.name}</p>
                     <div className={styles.list}>

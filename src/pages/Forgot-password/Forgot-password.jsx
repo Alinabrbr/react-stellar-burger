@@ -20,7 +20,7 @@ export default function ForgotPassword() {
 
     if (successForgot) {
         return (
-            <Navigate to={'/reset-password'} />
+            <Navigate to={'/reset-password'} state={{fromForgotPassword: true}}/>
         )
     }
 

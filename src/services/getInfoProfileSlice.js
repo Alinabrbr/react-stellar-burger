@@ -45,8 +45,8 @@ const profileInfo = createSlice({
                 state.error = '';
             })
             .addCase(fetchEditInfoProfileResult.fulfilled.type, (state, action) => {
-                state.name = action.payload.name;
-                state.email = action.payload.email;
+                state.name = action.payload.user.name;
+                state.email = action.payload.user.email;
                 state.isLoading = false;
             })
             .addCase(fetchEditInfoProfileResult.rejected.type, (state, action) => {
