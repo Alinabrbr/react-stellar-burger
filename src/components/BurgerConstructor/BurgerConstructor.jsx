@@ -95,7 +95,7 @@ export default function BurgerConstructor() {
                             )
                         }
                         openModal();
-                        dispatch(fetchOrderResult({ingredients: [...cards.map((ingredient) => ingredient._id), bun._id]}));
+                        dispatch(fetchOrderResult({ingredients: [...cards.map((ingredient) => ingredient._id), bun._id], token: accessToken}));
                     }}
                             disabled={cards.length === 0 || !cards.find((item) => item.type === "bun")}
                             htmlType="button" type="primary" size="large">

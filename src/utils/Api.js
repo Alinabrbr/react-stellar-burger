@@ -7,12 +7,13 @@ export const fetchCard = () => {
         .then(checkResponse);
 }
 
-export const postOrderRequest = (ingredients) => {
+export const postOrderRequest = ({ingredients, token}) => {
     return fetch(`${urlApi}/orders`, {
         method: "POST",
-        body: JSON.stringify(ingredients),
+        body: JSON.stringify({"ingredients": ingredients}),
         headers: {
             "Content-Type": 'application/json',
+            "Authorization": token,
         },
     })
     .then(checkResponse);
