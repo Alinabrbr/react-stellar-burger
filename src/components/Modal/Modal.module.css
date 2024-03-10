@@ -27,3 +27,9 @@
   z-index: 10;
   cursor: pointer;
 }
+
+.children_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -24,8 +24,23 @@
 
 .navContainer {
   display: flex;
+  flex-direction: row;
 }
 
 .logo {
   margin-left: 112px;
+}
+
+.active {
+  color: #F2F2F3;
+  display: flex;
+}
+
+.inactive {
+  color: #8585AD;
+  display: flex;
+}
+
+.navContainer a:-webkit-any-link {
+  text-decoration: none;
 }

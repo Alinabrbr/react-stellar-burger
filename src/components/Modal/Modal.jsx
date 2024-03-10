@@ -7,14 +7,13 @@ import ModalOverlay from "../Modal-overlay/Modal-overlay";
 import PropTypes from "prop-types";
 
 export default function Modal(props) {
-    const closeModal = props.closeModal;
 
     const modalElement = document.getElementById('modal');
 
     useEffect(() => {
         function onEsc(evt) {
             if (evt.code === "Escape") {
-                closeModal();
+                props.closeModal();
             }
         }
 
@@ -26,12 +25,12 @@ export default function Modal(props) {
         (
             <>
                 <div className={clsx(styles.modal, 'pt-10 pr-10 pl-10 pb-15')}>
-                    {props.children}
-                    <div className={styles.closeIcon} onClick={closeModal}>
+                    <div className={styles.children_container}>{props.children}</div>
+                    <div className={styles.closeIcon} onClick={props.closeModal}>
                         <CloseIcon type="primary"/>
                     </div>
                 </div>
-                <ModalOverlay closeModal={closeModal}/>
+                <ModalOverlay onClick={props.closeModal}/>
             </>
         ),
         modalElement
@@ -39,6 +38,5 @@ export default function Modal(props) {
 }
 
 Modal.propTypes = {
-    closeModal: PropTypes.func,
     children: PropTypes.element
 }

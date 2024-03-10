@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import {postOrderRequest} from "../utils/Api";
+import {postOrderRequest} from "../utils/api";
 
 const initialState = {
     order: null,
@@ -9,8 +9,8 @@ const initialState = {
 
 export const fetchOrderResult = createAsyncThunk(
     `orderDetails/fetchOrderResult`,
-    async (ingredients) => {
-        return await postOrderRequest(ingredients);
+    async ({ingredients, token}) => {
+        return await postOrderRequest({ingredients, token});
     }
 );
 

@@ -1,0 +1,50 @@
+.container {
+  max-width: 1280px;
+  margin: 120px auto 0;
+}
+
+.text {
+  color: #8585AD;
+}
+
+.textOpacity {
+  opacity: 0.4;
+}
+
+.profile {
+  display: flex;
+  margin-left: 20px;
+  gap: 60px;
+}
+
+.profileInfo{
+  margin-right: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.navList {
+  max-width: 320px;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+nav a:-webkit-any-link {
+  text-decoration: none;
+}
+
+.active {
+  color: #F2F2F3;
+}
+
+.inactive {
+  color: #8585AD;
+}
+
+.input::placeholder {
+  color: #8585AD;
+}

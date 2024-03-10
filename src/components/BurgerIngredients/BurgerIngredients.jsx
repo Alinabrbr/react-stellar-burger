@@ -43,7 +43,7 @@ export default function BurgerIngredients() {
                     <Tab value="main" active={current === 'main'}>Начинки</Tab>
                 </Container>
             </div>
-            <div className={styles.cardsContainer} >
+            <div className={styles.cardsContainer}>
                 <h2 className='text text_type_main-medium'>Булки</h2>
                 <ul className={clsx(styles.cards, 'mt-6 ml-4')} ref={bunsRef}>
                     {cards.map((card) => (card.type === "bun" &&
@@ -54,12 +54,14 @@ export default function BurgerIngredients() {
                 <h2 className='text text_type_main-medium mt-10'>Соусы</h2>
                 <ul className={clsx(styles.cards, 'mt-6 ml-4')} ref={saucesRef}>
                     {cards.map((card) => (card.type === "sauce" &&
-                        <Card priceSize={"default"} card={card} key={card._id} count={burgerConstructor.filter(ingredient => ingredient._id === card._id).length}/>))}
+                        <Card priceSize={"default"} card={card} key={card._id}
+                              count={burgerConstructor.filter(ingredient => ingredient._id === card._id).length}/>))}
                 </ul>
                 <h2 className='text text_type_main-medium mt-10'>Начинки</h2>
                 <ul className={clsx(styles.cards, 'mt-6 ml-4')} ref={mainRef}>
                     {cards.map((card) => (card.type === "main" &&
-                        <Card priceSize={"default"} card={card} key={card._id} count={burgerConstructor.filter(ingredient => ingredient._id === card._id).length}/>))}
+                        <Card priceSize={"default"} card={card} key={card._id}
+                              count={burgerConstructor.filter(ingredient => ingredient._id === card._id).length}/>))}
                 </ul>
             </div>
         </section>
