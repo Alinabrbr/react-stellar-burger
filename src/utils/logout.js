@@ -1,13 +1,11 @@
-import checkResponse from "./checkResponse";
-import {urlApiAuth} from "./auth";
+import {request} from "./api";
 
 export const postLogoutRequest = (token) => {
-    return fetch(`${urlApiAuth}/logout`, {
+    return request(`/auth//logout`, {
         method: "POST",
         body: JSON.stringify(token),
         headers: {
             "Content-Type": 'application/json',
         },
-    })
-        .then(checkResponse);
+    });
 }

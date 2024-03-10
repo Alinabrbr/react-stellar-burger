@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {fetchCard} from "../utils/Api";
+import {fetchCard} from "../utils/api";
 
 const initialState = {
     cardsArray: [],

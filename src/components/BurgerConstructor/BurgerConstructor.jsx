@@ -28,7 +28,7 @@ export default function BurgerConstructor() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const accessToken = useSelector((state) => state.accessToken.accessToken);
+    const accessToken = localStorage.getItem("accessToken");
 
     const openModal = () => {
         dispatch(openPopup())

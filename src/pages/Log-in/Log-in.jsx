@@ -1,15 +1,13 @@
 import React, {useState} from "react";
 import styles from "./Log-in.module.css";
 import {Button, EmailInput, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link, Navigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {Link} from "react-router-dom";
+import {useDispatch} from "react-redux";
 import {fetchLoginResult} from "../../services/registerAndAuthorizationSlice";
 import clsx from "clsx";
 
-export default function LogIn () {
+export default function LogIn() {
     const dispatch = useDispatch()
-
-    const auth = useSelector((state) => state.accessToken.accessToken);
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -17,15 +15,6 @@ export default function LogIn () {
     function login(event) {
         event.preventDefault();
         dispatch(fetchLoginResult({email: email, password: password}));
-
-        setEmail('');
-        setPassword('');
-    }
-
-    if (auth) {
-        return (
-            <Navigate to={'/profile'} />
-        )
     }
 
     return (
@@ -35,10 +24,11 @@ export default function LogIn () {
 
             <form className={styles.form} onSubmit={login}>
 
-                <EmailInput type={'email'} placeholder={'E-mail'} value={email} icon="EditIcon"
-                       onChange={(event) => setEmail(event.target.value)}/>
+                <EmailInput type={'email'} placeholder={'E-mail'} value={email} icon="EditIcon" autoComplete='email'
+                            onChange={(event) => setEmail(event.target.value)}/>
                 <PasswordInput type={'password'} placeholder={'Пароль'} name={"password"} value={password}
-                       onChange={(event) => setPassword(event.target.value)}/>
+                               autoComplete='current-password'
+                               onChange={(event) => setPassword(event.target.value)}/>
 
                 <div className={styles.buttonContainer}>
                     <Button htmlType="submit" type="primary" size="medium" extraClass="ml-2">

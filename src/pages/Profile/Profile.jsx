@@ -1,34 +1,26 @@
 import React, {useEffect, useState} from "react";
-import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {NavLink} from "react-router-dom";
 import styles from "../Profile/Profile.module.css"
 import clsx from "clsx";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchLogoutResult} from "../../services/logoutSlice";
-import {clearAccessToken} from "../../services/registerAndAuthorizationSlice";
+import {fetchLogoutResult} from "../../services/registerAndAuthorizationSlice";
 import {fetchEditInfoProfileResult, fetchInfoProfileResult} from "../../services/getInfoProfileSlice";
 
 
 export default function Profile() {
 
-    const getActiveClass = ({isActive})=> isActive ? styles.active : styles.inactive;
+    const getActiveClass = ({isActive}) => isActive ? styles.active : styles.inactive;
 
     const dispatch = useDispatch();
-    const accessToken = useSelector((state) => state.accessToken.accessToken);
+    const accessToken = localStorage.getItem("accessToken");
     const refreshToken = localStorage.getItem("refreshToken");
 
     const profileInfo = useSelector((state) => state.profileInfo);
 
     useEffect(() => {
-        if (accessToken) {
-            dispatch(fetchInfoProfileResult(accessToken));
-        }
-    }, [dispatch, accessToken])
-
-    // Если accessToken протух
-    if (profileInfo.error) {
-        dispatch(clearAccessToken());
-    }
+        dispatch(fetchInfoProfileResult(accessToken));
+    }, [dispatch])
 
     const [form, setForm] = useState({
         name: "",
@@ -44,12 +36,8 @@ export default function Profile() {
         })
     }, [profileInfo])
 
-    function logout(event) {
-        event.preventDefault();
-
+    function logout() {
         dispatch(fetchLogoutResult({token: refreshToken}));
-        localStorage.removeItem("refreshToken");
-        dispatch(clearAccessToken());
     }
 
     function editProfile(event) {
@@ -99,7 +87,8 @@ export default function Profile() {
                         <p className={clsx(styles.text, 'text_type_main-medium mt-4 mb-4')}>Выход</p>
                     </NavLink>
 
-                    <p className={clsx(styles.text, styles.textOpacity, 'text_type_main-default mt-20')}>В этом разделе вы можете
+                    <p className={clsx(styles.text, styles.textOpacity, 'text_type_main-default mt-20')}>В этом разделе
+                        вы можете
                         изменить свои персональные данные
                     </p>
                 </nav>
@@ -111,6 +100,7 @@ export default function Profile() {
 
                     : <form className={styles.profileInfo} onSubmit={(e) => editProfile(e)}>
                         <Input extraClass={styles.input} name="name" type={'text'} placeholder={'Имя'} value={form.name}
+                               autoComplete="name"
                                onChange={updateInput}
                                icon="EditIcon"
                                onIconClick={e => {
@@ -118,15 +108,18 @@ export default function Profile() {
                                }}
                                disabled={profileInfo.isLoading}
                         />
-                        <Input name="email" type={'text'} placeholder={'Логин'} value={form.email}
-                               onChange={updateInput}
-                               disabled={profileInfo.isLoading}
-                               icon="EditIcon"
+                        <EmailInput name="email" type={'text'} placeholder={'Логин'} value={form.email}
+                                    autoComplete={"email"}
+                                    onChange={updateInput}
+                                    disabled={profileInfo.isLoading}
+                                    icon="EditIcon"
                         />
-                        <Input name="password" type={'password'} placeholder={'Введите новый пароль'} value={form.password}
-                               onChange={updateInput}
-                               disabled={profileInfo.isLoading}
-                               icon="EditIcon"
+                        <PasswordInput name="password" type={'password'} placeholder={'Введите новый пароль'}
+                                       value={form.password}
+                                       autoComplete='current-password'
+                                       onChange={updateInput}
+                                       disabled={profileInfo.isLoading}
+                                       icon="EditIcon"
                         />
 
                         <div className={styles.buttonsContainer}>

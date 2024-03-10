@@ -1,12 +1,15 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {postLoginRequest, postRegisterProfileRequest} from "../utils/auth";
 import {getRefreshTokenRequest} from "../utils/token";
+import {postLogoutRequest} from "../utils/logout";
 
 const initialState = {
     isLoading: "",
     error: "",
-    accessToken: null,
-    refreshToken: null
+    success: false,
+    accessToken: localStorage.getItem("accessToken"),
+    refreshToken: localStorage.getItem("refreshToken"),
+    message: ""
 };
 
 export const fetchRegisterProfileResult = createAsyncThunk(
@@ -23,6 +26,13 @@ export const fetchLoginResult = createAsyncThunk(
     }
 );
 
+export const fetchLogoutResult = createAsyncThunk(
+    'logout',
+    async (token) => {
+        return await postLogoutRequest(token).then((data) => data);
+    }
+);
+
 export const fetchRefreshTokenResult = createAsyncThunk(
     `token/fetchRefreshTokenResult`,
     async (token) => {
@@ -36,7 +46,7 @@ const Register = createSlice({
     reducers: {
         clearAccessToken: (state) => {
             state.accessToken = null;
-        }
+        },
     },
     extraReducers: builder => {
         builder
@@ -44,12 +54,7 @@ const Register = createSlice({
                 state.isLoading = true;
                 state.error = '';
             })
-            .addCase(fetchRegisterProfileResult.fulfilled.type, (state, action) => {
-                state.accessToken = action.payload.accessToken;
-                state.refreshToken = action.payload.refreshToken;
-                state.isLoading = false;
-                localStorage.setItem('refreshToken', action.payload.refreshToken);
-            })
+            .addCase(fetchRegisterProfileResult.fulfilled.type, handleLogin)
             .addCase(fetchRegisterProfileResult.rejected.type, (state, action) => {
                 state.error = action.payload;
                 state.isLoading = false;
@@ -58,13 +63,24 @@ const Register = createSlice({
                 state.isLoading = true;
                 state.error = '';
             })
-            .addCase(fetchLoginResult.fulfilled.type, (state, action) => {
-                state.accessToken = action.payload.accessToken;
-                state.refreshToken = action.payload.refreshToken;
-                state.isLoading = false;
-                localStorage.setItem('refreshToken', action.payload.refreshToken);
-            })
+            .addCase(fetchLoginResult.fulfilled.type, handleLogin)
             .addCase(fetchLoginResult.rejected.type, (state, action) => {
+                state.error = action.payload;
+                state.isLoading = false;
+            })
+            .addCase(fetchLogoutResult.pending.type, (state, action) => {
+                state.isLoading = true;
+                state.error = '';
+            })
+            .addCase(fetchLogoutResult.fulfilled.type, (state, action) => {
+                state.message = action.payload.message;
+                state.isLoading = false;
+                state.accessToken = '';
+                state.refreshToken = '';
+                localStorage.removeItem('accessToken');
+                localStorage.removeItem('refreshToken');
+            })
+            .addCase(fetchLogoutResult.rejected.type, (state, action) => {
                 state.error = action.payload;
                 state.isLoading = false;
             })
@@ -75,7 +91,9 @@ const Register = createSlice({
             .addCase(fetchRefreshTokenResult.fulfilled.type, (state, action) => {
                 state.accessToken = action.payload.accessToken;
                 state.refreshToken = action.payload.refreshToken;
+                state.success = action.payload.success;
                 state.isLoading = false;
+                localStorage.setItem('accessToken', action.payload.accessToken);
                 localStorage.setItem('refreshToken', action.payload.refreshToken);
             })
             .addCase(fetchRefreshTokenResult.rejected.type, (state, action) => {
@@ -83,6 +101,14 @@ const Register = createSlice({
             })
     }
 })
+
+function handleLogin(state, action) {
+    state.accessToken = action.payload.accessToken;
+    state.refreshToken = action.payload.refreshToken;
+    state.isLoading = false;
+    localStorage.setItem('accessToken', action.payload.accessToken);
+    localStorage.setItem('refreshToken', action.payload.refreshToken);
+}
 
 export default Register.reducer;
 export const {clearAccessToken} = Register.actions;

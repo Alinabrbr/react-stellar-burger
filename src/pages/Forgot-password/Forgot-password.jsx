@@ -31,7 +31,7 @@ export default function ForgotPassword() {
 
             <form className={styles.form} onSubmit={forgotPassword}>
 
-                <EmailInput type={'email'} placeholder={'Укажите e-mail'} value={email}
+                <EmailInput type={'email'} placeholder={'Укажите e-mail'} value={email} autoComplete='email'
                             onChange={(event) => setEmail(event.target.value)}/>
 
                 <div className={styles.buttonContainer}>

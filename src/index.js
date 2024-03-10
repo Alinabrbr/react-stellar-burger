@@ -14,7 +14,6 @@ import registerReducer from "./services/registerAndAuthorizationSlice";
 import {BrowserRouter} from "react-router-dom";
 import forgotPasswordReducer from "./services/forgotPasswordSlice";
 import resetPasswordReducer from "./services/resetPasswordSlice";
-import logoutReducer from "./services/logoutSlice";
 import profileInfoReducer from "./services/getInfoProfileSlice";
 
 
@@ -28,7 +27,6 @@ export const store = configureStore({
         accessToken: registerReducer,
         successForgotPassword: forgotPasswordReducer,
         successResetPassword: resetPasswordReducer,
-        messageLogout: logoutReducer,
         profileInfo: profileInfoReducer
     }
 })

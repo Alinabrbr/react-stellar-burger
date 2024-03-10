@@ -45,9 +45,12 @@ function App() {
                     <Route path="/" element={<LayoutHeader/>}>
                         <Route index element={<Constructor/>}/>
                         <Route path="login" element={<ProtectedRoute unauthOnly={true}><LogIn/></ProtectedRoute>}/>
-                        <Route path="register" element={<ProtectedRoute unauthOnly={true}><Register/></ProtectedRoute>}/>
-                        <Route path="forgot-password" element={<ProtectedRoute unauthOnly={true}><ForgotPassword/></ProtectedRoute>}/>
-                        <Route path="reset-password" element={<ProtectedRoute unauthOnly={true}><ResetPassword/></ProtectedRoute>}/>
+                        <Route path="register"
+                               element={<ProtectedRoute unauthOnly={true}><Register/></ProtectedRoute>}/>
+                        <Route path="forgot-password"
+                               element={<ProtectedRoute unauthOnly={true}><ForgotPassword/></ProtectedRoute>}/>
+                        <Route path="reset-password"
+                               element={<ProtectedRoute unauthOnly={true}><ResetPassword/></ProtectedRoute>}/>
                         <Route path="profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
                         <Route path="ingredients/:id" element={<IngredientDetails cards={cards}/>}/>
                         <Route path="*" element={<NotFound/>}/>

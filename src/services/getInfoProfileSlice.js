@@ -11,7 +11,7 @@ const initialState = {
 export const fetchInfoProfileResult = createAsyncThunk(
     `profileInfo/fetchInfoProfileResult`,
     async (accessToken) => {
-        return await getInfoProfileRequest(accessToken).then((data) => data);
+        return await getInfoProfileRequest(accessToken);
     }
 );
 
@@ -25,6 +25,12 @@ export const fetchEditInfoProfileResult = createAsyncThunk(
 const profileInfo = createSlice({
     name: 'profileInfo',
     initialState,
+    reducers: {
+        setUser: (state, action) => {
+            state.name = action.payload.name;
+            state.email = action.payload.email;
+        },
+    },
     extraReducers: builder => {
         builder
             .addCase(fetchInfoProfileResult.pending.type, state => {
@@ -57,3 +63,4 @@ const profileInfo = createSlice({
 })
 
 export default profileInfo.reducer;
+export const {setUser} = profileInfo.actions;

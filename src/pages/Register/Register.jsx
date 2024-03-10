@@ -2,14 +2,14 @@ import React, {useState} from "react";
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, Navigate} from "react-router-dom";
 import {fetchRegisterProfileResult} from "../../services/registerAndAuthorizationSlice";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import clsx from "clsx";
 import styles from "../Register/Register.module.css";
 
 export default function Register() {
     const dispatch = useDispatch()
 
-    const auth = useSelector((state) => state.accessToken.accessToken);
+    const auth = localStorage.getItem("accessToken");
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -37,13 +37,13 @@ export default function Register() {
 
             <form className={styles.form} onSubmit={registerProfile}>
 
-                <Input type='text' id='name' placeholder='Имя' value={name}
+                <Input type='text' id='name' placeholder='Имя' value={name} autoComplete='name'
                        onChange={(event) => setName(event.target.value)}/>
 
-                <EmailInput type='email' id='email' placeholder='E-mail' value={email}
+                <EmailInput type='email' id='email' placeholder='E-mail' value={email} autoComplete='email'
                        onChange={(event) => setEmail(event.target.value)}/>
 
-                <PasswordInput type='password' id='password' placeholder='Пароль' value={password}
+                <PasswordInput type='password' id='password' placeholder='Пароль' value={password} autoComplete='new-password'
                        onChange={(event) => setPassword(event.target.value)}/>
 
 
