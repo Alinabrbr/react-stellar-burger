@@ -9,9 +9,7 @@ const initialState = {
 
 export const fetchOrderResult = createAsyncThunk(
     `orderDetails/fetchOrderResult`,
-    async ({ingredients, token}) => {
-        return await postOrderRequest({ingredients, token});
-    }
+    postOrderRequest
 );
 
 export const orderDetailsSlice = createSlice({

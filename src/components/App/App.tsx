@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import styles from "./App.module.css";
 import LayoutHeader from "../Layout-header/Layout-header";
-import {useDispatch, useSelector} from "react-redux";
 import {getIngredients} from "../../services/cardsSlice";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import Profile from "../../pages/Profile/Profile";
@@ -13,23 +12,21 @@ import {HTML5Backend} from "react-dnd-html5-backend";
 import {DndProvider} from "react-dnd";
 import ForgotPassword from "../../pages/Forgot-password/Forgot-password";
 import ResetPassword from "../../pages/Reset-password/Reset-password";
-import {getCards} from "../../services/cardsSelector";
 import IngredientDetails from "../Ingredient-details/Ingredient-details";
 import Modal from "../Modal/Modal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import {useAppDispatch} from "../../utils/types";
 
-function App() {
+function App(): JSX.Element {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getIngredients());
     }, [dispatch]);
 
-    const cards = useSelector(getCards);
-
-    const closeModal = () => {
+    const closeModal = (): void => {
         return (
             navigate("/")
         )
@@ -51,8 +48,8 @@ function App() {
                                element={<ProtectedRoute unauthOnly={true}><ForgotPassword/></ProtectedRoute>}/>
                         <Route path="reset-password"
                                element={<ProtectedRoute unauthOnly={true}><ResetPassword/></ProtectedRoute>}/>
-                        <Route path="profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
-                        <Route path="ingredients/:id" element={<IngredientDetails cards={cards}/>}/>
+                        <Route path="profile" element={<ProtectedRoute children={<Profile/>} unauthOnly={false}/>}/>
+                        <Route path="ingredients/:id" element={<IngredientDetails/>}/>
                         <Route path="*" element={<NotFound/>}/>
                     </Route>
                 </Routes>
@@ -62,7 +59,7 @@ function App() {
                             path="/ingredients/:id"
                             element={
                                 <Modal closeModal={closeModal}>
-                                    <IngredientDetails cards={cards}/>
+                                    <IngredientDetails/>
                                 </Modal>
                             }
                         />

@@ -4,16 +4,20 @@ import clsx from "clsx";
 import {createPortal} from "react-dom";
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../Modal-overlay/Modal-overlay";
-import PropTypes from "prop-types";
 
-export default function Modal(props) {
+const modalElement = document.getElementById('modal') as HTMLElement;
 
-    const modalElement = document.getElementById('modal');
+export type TModalProps = {
+    closeModal: () => void;
+    children?: React.ReactNode;
+}
+
+export default function Modal({children, closeModal}: TModalProps): JSX.Element {
 
     useEffect(() => {
-        function onEsc(evt) {
+        function onEsc(evt: KeyboardEvent): void {
             if (evt.code === "Escape") {
-                props.closeModal();
+                closeModal();
             }
         }
 
@@ -25,18 +29,14 @@ export default function Modal(props) {
         (
             <>
                 <div className={clsx(styles.modal, 'pt-10 pr-10 pl-10 pb-15')}>
-                    <div className={styles.children_container}>{props.children}</div>
-                    <div className={styles.closeIcon} onClick={props.closeModal}>
+                    <div className={styles.children_container}>{children}</div>
+                    <div className={styles.closeIcon} onClick={closeModal}>
                         <CloseIcon type="primary"/>
                     </div>
                 </div>
-                <ModalOverlay onClick={props.closeModal}/>
+                <ModalOverlay closeModal={closeModal}/>
             </>
         ),
         modalElement
     )
-}
-
-Modal.propTypes = {
-    children: PropTypes.element
 }

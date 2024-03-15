@@ -11,36 +11,37 @@ import {closePopup, openPopup} from "../../services/orderSlice";
 import {getModalOrderSelector} from "../../services/getModalOrderSelector";
 import {addIngredient, clearStore, removeIngredient} from "../../services/constructorSlice";
 import {useDrop} from "react-dnd";
-import {constructorSelector} from "../../services/constructorSelector";
 import {totalPriceSelector} from "../../services/totalPriceSelector";
 import {fetchOrderResult} from "../../services/orderDetailsSlice";
 import {useNavigate} from "react-router-dom";
+import {TIngredient, useAppSelector} from "../../utils/types";
+import {constructorSelector} from "../../services/constructorSelector";
 
-export default function BurgerConstructor() {
+export default function BurgerConstructor(): JSX.Element {
 
-    const cards = useSelector(constructorSelector);
+    const cards: TIngredient[] = useAppSelector(constructorSelector);
 
     const totalPrice = useSelector(totalPriceSelector);
 
-    const bun = cards.find(card => card.type === 'bun');
+    const bun: TIngredient | undefined = cards.find((card: TIngredient):boolean  => card.type === 'bun');
 
-    const modalOrderState = useSelector(getModalOrderSelector)
+    const modalOrderState = useAppSelector(getModalOrderSelector)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const accessToken = localStorage.getItem("accessToken");
+    const accessToken: string | null = localStorage.getItem("accessToken");
 
-    const openModal = () => {
+    const openModal = (): void => {
         dispatch(openPopup())
     };
 
-    const closeModal = () => {
+    const closeModal = (): void => {
         dispatch(closePopup());
         clearStoreBurgerConstructor();
     };
 
-    const clearStoreBurgerConstructor = () => {
-        dispatch(clearStore());
+    const clearStoreBurgerConstructor = (): void => {
+        dispatch(clearStore(''));
     }
 
     const [, dropRef] = useDrop({
@@ -50,7 +51,7 @@ export default function BurgerConstructor() {
         }
     });
 
-    const deleteIngredient = (card) => {
+    const deleteIngredient = (card: TIngredient):void => {
         dispatch(removeIngredient(card));
     }
 
@@ -62,7 +63,7 @@ export default function BurgerConstructor() {
                     <div className='mr-4 ml-4'>
                         {
                             bun && (
-                                <ConstructorElement text={`${bun.name} (верх)`} isLocked='isLocked' type='top' thumbnail={bun.image} price={bun.price}/>
+                                <ConstructorElement text={`${bun.name} (верх)`} isLocked={true} type='top' thumbnail={bun.image} price={bun.price}/>
                             )
                         }
                     </div>
@@ -70,7 +71,7 @@ export default function BurgerConstructor() {
 
                 <div className={clsx(styles.burgerIngredientsContainerScroll, 'mb-4')}>
                     <div className='mr-4'>
-                        {cards.map((card, index) => (
+                        {cards.map((card:TIngredient, index: number) => (
                             (card.type === "main" || card.type ==='sauce') && <ConstructorElementBun card={card} index={index} key={card.ingredientId} handleClose={() => deleteIngredient(card)}/>
                         ))}
                     </div>
@@ -80,7 +81,7 @@ export default function BurgerConstructor() {
                     <div className='mr-4 ml-4'>
                         {
                             bun && (
-                                <ConstructorElement text={`${bun.name} (низ)`} isLocked='isLocked' type='bottom' thumbnail={bun.image} price={bun.price}/>
+                                <ConstructorElement text={`${bun.name} (низ)`} isLocked={true} type='bottom' thumbnail={bun.image} price={bun.price}/>
                             )
                         }
                     </div>
@@ -95,9 +96,9 @@ export default function BurgerConstructor() {
                             )
                         }
                         openModal();
-                        dispatch(fetchOrderResult({ingredients: [...cards.map((ingredient) => ingredient._id), bun._id], token: accessToken}));
+                        dispatch(fetchOrderResult({ingredients: [...cards.map((ingredient:TIngredient) => ingredient._id), bun?._id], token: accessToken}));
                     }}
-                            disabled={cards.length === 0 || !cards.find((item) => item.type === "bun")}
+                            disabled={cards.length === 0 || !cards.find((item: TIngredient) : boolean => item.type === "bun")}
                             htmlType="button" type="primary" size="large">
                         Оформить заказ
                     </Button>

@@ -2,11 +2,17 @@ import React from "react";
 import Price from "../Price/Price";
 import styles from "../Card/Card.module.css";
 import {Counter} from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from 'prop-types';
 import {useDrag} from "react-dnd";
 import {Link, useLocation} from "react-router-dom";
+import {TIngredient} from "../../utils/types";
 
-export default function Card({card, priceSize, count}) {
+type TCardProps = {
+    card: TIngredient;
+    priceSize: string;
+    count: number;
+}
+
+export default function Card({card, priceSize, count}: TCardProps): JSX.Element {
 
     const location = useLocation();
 
@@ -31,10 +37,3 @@ export default function Card({card, priceSize, count}) {
         </>
     )
 }
-
-Card.propTypes = {
-    name: PropTypes.string,
-    image: PropTypes.string,
-    price: PropTypes.number,
-    count: PropTypes.number
-};

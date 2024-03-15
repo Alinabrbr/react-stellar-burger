@@ -8,10 +8,10 @@ const orderPopupSlice = createSlice({
     name: 'orderPopup',
     initialState,
     reducers: {
-        openPopup: (state,action) => {
+        openPopup: (state) => {
             state.isModalState = true;
         },
-        closePopup: (state,action) => {
+        closePopup: (state) => {
             state.isModalState = false;
         },
     }

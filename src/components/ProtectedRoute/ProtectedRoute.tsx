@@ -3,7 +3,12 @@ import {Navigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {getAccessToken} from "../../services/tokenSelector";
 
-function ProtectedRoute({children, unauthOnly}) {
+type TProtected = {
+    unauthOnly: boolean;
+    children: JSX.Element;
+}
+
+function ProtectedRoute({children, unauthOnly = false}: TProtected): JSX.Element | null {
     const accessToken = useSelector(getAccessToken);
     const refreshToken = localStorage.getItem("refreshToken");
 
