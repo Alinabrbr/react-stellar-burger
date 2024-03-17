@@ -14,7 +14,7 @@ import {useDrop} from "react-dnd";
 import {totalPriceSelector} from "../../services/totalPriceSelector";
 import {fetchOrderResult} from "../../services/orderDetailsSlice";
 import {useNavigate} from "react-router-dom";
-import {TIngredient, useAppSelector} from "../../utils/types";
+import {TIngredient, useAppSelector} from "../../utils/types/types";
 import {constructorSelector} from "../../services/constructorSelector";
 
 export default function BurgerConstructor(): JSX.Element {
@@ -51,7 +51,7 @@ export default function BurgerConstructor(): JSX.Element {
         }
     });
 
-    const deleteIngredient = (card: TIngredient):void => {
+    const deleteIngredient = (card: TIngredient): void => {
         dispatch(removeIngredient(card));
     }
 

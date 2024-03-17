@@ -15,7 +15,7 @@ import ResetPassword from "../../pages/Reset-password/Reset-password";
 import IngredientDetails from "../Ingredient-details/Ingredient-details";
 import Modal from "../Modal/Modal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import {useAppDispatch} from "../../utils/types";
+import {useAppDispatch} from "../../utils/types/types";
 
 function App(): JSX.Element {
 

@@ -1,1 +1,0 @@
-export const getModalInfoSelector = store => store.popupInfo;

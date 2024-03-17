@@ -4,7 +4,7 @@ import {useParams} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {getCards, getCardsLoading} from "../../services/cardsSelector";
 import {getIngredients} from "../../services/cardsSlice";
-import {TIngredient, useAppSelector} from "../../utils/types";
+import {TIngredient, useAppSelector} from "../../utils/types/types";
 
 export default function IngredientDetails() : JSX.Element {
     const dispatch = useDispatch();

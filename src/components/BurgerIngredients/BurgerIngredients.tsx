@@ -7,7 +7,7 @@ import React, {useEffect, useState} from "react";
 import {getCards} from "../../services/cardsSelector";
 import {constructorSelector} from "../../services/constructorSelector";
 import {useInView} from "react-intersection-observer";
-import {TIngredient, useAppSelector} from "../../utils/types";
+import {TIngredient, useAppSelector} from "../../utils/types/types";
 
 export default function BurgerIngredients(): JSX.Element {
 
