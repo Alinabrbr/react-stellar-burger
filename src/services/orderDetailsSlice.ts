@@ -2,7 +2,7 @@ import {createSlice, createAsyncThunk, SerializedError} from '@reduxjs/toolkit';
 import {postOrderRequest} from "../utils/api";
 
 type TInitialState = {
-    order: number | null;
+    order: any;
     loading: boolean;
     error: SerializedError | null
 }

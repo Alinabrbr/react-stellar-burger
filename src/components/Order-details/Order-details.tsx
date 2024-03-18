@@ -14,7 +14,7 @@ export default function OrderDetails(): JSX.Element {
                 {loading || error ? (
                     <p className="text text_type_digits-default mt-14">{loading ? 'Загружаем номер заказа' : `Произошла: ${error}`}</p>
                 ) : (
-                    <p className={clsx(styles.textEffect, "text text_type_digits-large mt-14")}>{order.order.number}</p>
+                    <p className={clsx(styles.textEffect, "text text_type_digits-large mt-14")}>{order?.order.number}</p>
                 )}
                 <p className='text_type_main-medium mt-8'>идентификатор заказа</p>
                 <img className='mt-15 mb-15' src={imgIcon} alt='Ваш заказ начали готовить'></img>

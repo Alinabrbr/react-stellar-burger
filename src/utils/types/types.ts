@@ -1,7 +1,6 @@
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../services/store";
 import React from "react";
-// import {createAsyncThunk as createAsyncThunkRedux} from "@reduxjs/toolkit";
 
 export type TIngredient = {
     _id: string;
@@ -20,15 +19,13 @@ export type TIngredient = {
     isLocked?: boolean;
 }
 
+export type TMessageResponse = ServerResponse<{
+    message: string | null;
+}>
+
 export type TPropsChildren = {
     children: React.ReactNode;
 }
-
-// export const createAsyncThunk = createAsyncThunkRedux.withTypes<{
-//     state: RootState;
-//     dispatch: typeof useAppDispatch;
-//     extra: {};
-// }>();
 
 export type UserDto = {
     email: string;
@@ -36,8 +33,13 @@ export type UserDto = {
 }
 
 export type UserResponse = ServerResponse<{
-    user: UserDto|null;
-    message: string|null;
+    user: UserDto;
+    message: string | null;
+}>
+
+export type AuthResponse = ServerResponse<{
+    accessToken: string;
+    refreshToken: string;
 }>
 
 type ServerResponse<T> = {

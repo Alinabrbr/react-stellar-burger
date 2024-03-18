@@ -1,5 +1,6 @@
-import {createAsyncThunk, createSlice, SerializedError} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction, SerializedError} from "@reduxjs/toolkit";
 import {postResetPasswordRequest} from "../utils/auth";
+import {TMessageResponse} from "../utils/types/types";
 
 type TInitialState = {
     isLoading: boolean;
@@ -28,17 +29,16 @@ const resetPassword = createSlice({
                 state.isLoading = true;
                 state.error = null;
             })
-            .addCase(fetchResetPasswordResult.fulfilled.type, (state, action: any) => {
+            .addCase(fetchResetPasswordResult.fulfilled.type, (state, action: PayloadAction<TMessageResponse>) => {
                 state.success = action.payload.success;
                 state.isLoading = false;
             })
-            .addCase(fetchResetPasswordResult.rejected.type, (state, action: any) => {
-                state.error = action.payload;
+            .addCase(fetchResetPasswordResult.rejected.type, (state, action: PayloadAction<TMessageResponse>) => {
+                state.error = action.payload.message ? Error(action.payload.message) : null;
                 state.isLoading = false;
             })
     }
 })
 
 export default resetPassword.reducer;
-// export const {clearSuccess} = resetPassword.actions;
 

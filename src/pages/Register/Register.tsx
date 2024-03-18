@@ -7,7 +7,7 @@ import styles from "../Register/Register.module.css";
 import {useAppDispatch} from "../../utils/types/types";
 
 export default function Register(): JSX.Element {
-    const dispatch = useAppDispatch;
+    const dispatch = useAppDispatch();
 
     const auth = localStorage.getItem("accessToken");
 

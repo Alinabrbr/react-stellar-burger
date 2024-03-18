@@ -1,5 +1,6 @@
-import {createAsyncThunk, createSlice, SerializedError} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction, SerializedError} from "@reduxjs/toolkit";
 import {postForgotPasswordRequest} from "../utils/auth";
+import {TMessageResponse} from "../utils/types/types";
 
 
 type TInitialState = {
@@ -13,13 +14,6 @@ const initialState: TInitialState = {
     error: null,
     success: false
 };
-
-// export const fetchForgotPasswordResult = createAsyncThunk(
-//     `password/fetchForgotPasswordResult`,
-//     async (email) => {
-//         return await postForgotPasswordRequest(email).then((data) => data);
-//     }
-// );
 
 export const fetchForgotPasswordResult = createAsyncThunk(
     `password/fetchForgotPasswordResult`,
@@ -42,12 +36,12 @@ const forgotPassword = createSlice({
                 state.isLoading = true;
                 state.error = null;
             })
-            .addCase(fetchForgotPasswordResult.fulfilled.type, (state, action: any) => {
+            .addCase(fetchForgotPasswordResult.fulfilled.type, (state, action: PayloadAction<TMessageResponse>) => {
                 state.success = action.payload.success;
                 state.isLoading = false;
             })
-            .addCase(fetchForgotPasswordResult.rejected.type, (state, action: any) => {
-                state.error = action.payload;
+            .addCase(fetchForgotPasswordResult.rejected.type, (state, action: PayloadAction<TMessageResponse>) => {
+                state.error = action.payload.message ? Error(action.payload.message) : null;
                 state.isLoading = false;
             })
     }

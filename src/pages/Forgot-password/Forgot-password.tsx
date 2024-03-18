@@ -7,7 +7,7 @@ import clsx from "clsx";
 import {useAppDispatch, useAppSelector} from "../../utils/types/types";
 
 export default function ForgotPassword(): JSX.Element {
-    const dispatch = useAppDispatch;
+    const dispatch = useAppDispatch();
 
     const successForgot = useAppSelector((state) => state.successForgotPassword.success);
 

@@ -30,25 +30,20 @@ export const fetchEditInfoProfileResult = createAsyncThunk(
 const profileInfo = createSlice({
     name: 'profileInfo',
     initialState,
-    reducers: {
-        setUser: (state, action) => {
-            state.name = action.payload.name;
-            state.email = action.payload.email;
-        },
-    },
+    reducers: {},
     extraReducers: builder => {
         builder
             .addCase(fetchInfoProfileResult.pending.type, state => {
                 state.isLoading = true;
                 state.error = null;
             })
-            .addCase(fetchInfoProfileResult.fulfilled.type, (state, action: PayloadAction<any>) => {
+            .addCase(fetchInfoProfileResult.fulfilled.type, (state, action: PayloadAction<UserResponse>) => {
                 state.name = action.payload.user.name;
                 state.email = action.payload.user.email;
                 state.isLoading = false;
             })
-            .addCase(fetchInfoProfileResult.rejected.type, (state, action: any) => {
-                state.error = action.payload;
+            .addCase(fetchInfoProfileResult.rejected.type, (state, action: PayloadAction<UserResponse>) => {
+                state.error = action.payload.message ? Error(action.payload.message) : null;
                 state.isLoading = false;
             })
             .addCase(fetchEditInfoProfileResult.pending.type, state => {
@@ -68,4 +63,3 @@ const profileInfo = createSlice({
 })
 
 export default profileInfo.reducer;
-export const {setUser} = profileInfo.actions;

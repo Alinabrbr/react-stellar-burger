@@ -12,8 +12,13 @@ type TLoginRequest = {
     password: string;
 }
 
-export const postForgotPasswordRequest = (email: string): Promise<any> => {
-    return request(`/password-reset`, {
+type TPostResetPasswordRequest = {
+    password: string;
+    token: string;
+}
+
+export const postForgotPasswordRequest = (email: {email: string}): Promise<any> => {
+    return request<UserResponse>(`/password-reset`, {
         method: "POST",
         body: JSON.stringify(email),
         headers: {
@@ -22,13 +27,8 @@ export const postForgotPasswordRequest = (email: string): Promise<any> => {
     })
 }
 
-type TPostResetPasswordRequest = {
-    password: string;
-    token: string;
-}
-
 export const postResetPasswordRequest = ({password, token}: TPostResetPasswordRequest): Promise<any> => {
-    return request(`/password-reset/reset`, {
+    return request<UserResponse>(`/password-reset/reset`, {
         method: "POST",
         body: JSON.stringify({password, token}),
         headers: {
@@ -37,7 +37,7 @@ export const postResetPasswordRequest = ({password, token}: TPostResetPasswordRe
     })
 }
 
-export const postRegisterProfileRequest = ({name, email, password}: TProfileRequest) => {
+export const postRegisterProfileRequest = ({name, email, password}: TProfileRequest): Promise<any> => {
     return request<UserResponseToken>(`/auth/register`, {
         method: "POST",
         body: JSON.stringify({name, email, password}),
@@ -47,7 +47,7 @@ export const postRegisterProfileRequest = ({name, email, password}: TProfileRequ
     })
 }
 
-export const postLoginRequest = ({email, password}: TLoginRequest) => {
+export const postLoginRequest = ({email, password}: TLoginRequest): Promise<any> => {
     return requestWithRefresh<UserResponseToken>(`/auth/login`, {
         method: "POST",
         body: JSON.stringify({email, password}),
@@ -57,7 +57,7 @@ export const postLoginRequest = ({email, password}: TLoginRequest) => {
     })
 }
 
-export const getInfoProfileRequest = () => {
+export const getInfoProfileRequest = (): Promise<any> => {
     return requestWithRefresh<UserResponse>(`/auth/user`, {
         method: "GET",
         headers: {

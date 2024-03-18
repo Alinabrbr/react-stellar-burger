@@ -7,7 +7,7 @@ import clsx from "clsx";
 import {useAppDispatch, useAppSelector} from "../../utils/types/types";
 
 export default function ResetPassword() {
-    const dispatch = useAppDispatch;
+    const dispatch = useAppDispatch();
     const location = useLocation();
     const navigate = useNavigate();
 

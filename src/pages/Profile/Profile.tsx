@@ -12,9 +12,8 @@ export default function Profile(): JSX.Element {
 
     const getActiveClass = ({isActive} : {isActive: boolean}) => isActive ? styles.active : styles.inactive;
 
-    const dispatch = useAppDispatch;
-    const accessToken = localStorage.getItem("accessToken");
-    const refreshToken = localStorage.getItem("refreshToken");
+    const dispatch = useAppDispatch();
+    // const refreshToken = localStorage.getItem("refreshToken");
 
     const profileInfo = useAppSelector((state) => state.profileInfo);
 
@@ -35,10 +34,6 @@ export default function Profile(): JSX.Element {
             password: "",
         })
     }, [profileInfo])
-
-    function logout() {
-        dispatch(fetchLogoutResult({token: refreshToken}));
-    }
 
     function editProfile(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -79,13 +74,12 @@ export default function Profile(): JSX.Element {
                         <p className={clsx(styles.text, 'text_type_main-medium mt-4 mb-4')}>История заказов</p>
                     </NavLink>
 
-                    <NavLink className={getActiveClass} onClick={logout} to='/login'>
+                    <NavLink className={getActiveClass} onClick={() => {dispatch(fetchLogoutResult())}} to='/login'>
                         <p className={clsx(styles.text, 'text_type_main-medium mt-4 mb-4')}>Выход</p>
                     </NavLink>
 
-                    <p className={clsx(styles.text, styles.textOpacity, 'text_type_main-default mt-20')}>В этом разделе
-                        вы можете
-                        изменить свои персональные данные
+                    <p className={clsx(styles.text, styles.textOpacity, 'text_type_main-default mt-20')}>
+                        В этом разделе вы можете изменить свои персональные данные
                     </p>
                 </nav>
 

@@ -6,7 +6,6 @@ import Price from "../Price/Price";
 import {Button, ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../Modal/Modal";
 import OrderDetails from "../Order-details/Order-details";
-import {useDispatch, useSelector} from "react-redux";
 import {closePopup, openPopup} from "../../services/orderSlice";
 import {getModalOrderSelector} from "../../services/getModalOrderSelector";
 import {addIngredient, clearStore, removeIngredient} from "../../services/constructorSlice";
@@ -14,19 +13,19 @@ import {useDrop} from "react-dnd";
 import {totalPriceSelector} from "../../services/totalPriceSelector";
 import {fetchOrderResult} from "../../services/orderDetailsSlice";
 import {useNavigate} from "react-router-dom";
-import {TIngredient, useAppSelector} from "../../utils/types/types";
+import {TIngredient, useAppDispatch, useAppSelector} from "../../utils/types/types";
 import {constructorSelector} from "../../services/constructorSelector";
 
 export default function BurgerConstructor(): JSX.Element {
 
     const cards: TIngredient[] = useAppSelector(constructorSelector);
 
-    const totalPrice = useSelector(totalPriceSelector);
+    const totalPrice = useAppSelector(totalPriceSelector);
 
-    const bun: TIngredient | undefined = cards.find((card: TIngredient):boolean  => card.type === 'bun');
+    const bun = cards.find((card) => card.type === 'bun');
 
     const modalOrderState = useAppSelector(getModalOrderSelector)
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const accessToken: string | null = localStorage.getItem("accessToken");
@@ -63,7 +62,8 @@ export default function BurgerConstructor(): JSX.Element {
                     <div className='mr-4 ml-4'>
                         {
                             bun && (
-                                <ConstructorElement text={`${bun.name} (верх)`} isLocked={true} type='top' thumbnail={bun.image} price={bun.price}/>
+                                <ConstructorElement text={`${bun.name} (верх)`} isLocked={true} type='top'
+                                                    thumbnail={bun.image} price={bun.price}/>
                             )
                         }
                     </div>
@@ -71,8 +71,10 @@ export default function BurgerConstructor(): JSX.Element {
 
                 <div className={clsx(styles.burgerIngredientsContainerScroll, 'mb-4')}>
                     <div className='mr-4'>
-                        {cards.map((card:TIngredient, index: number) => (
-                            (card.type === "main" || card.type ==='sauce') && <ConstructorElementBun card={card} index={index} key={card.ingredientId} handleClose={() => deleteIngredient(card)}/>
+                        {cards.map((card: TIngredient, index: number) => (
+                            (card.type === "main" || card.type === 'sauce') &&
+                            <ConstructorElementBun card={card} index={index} key={card.ingredientId}
+                                                   handleClose={() => deleteIngredient(card)}/>
                         ))}
                     </div>
                 </div>
@@ -81,7 +83,8 @@ export default function BurgerConstructor(): JSX.Element {
                     <div className='mr-4 ml-4'>
                         {
                             bun && (
-                                <ConstructorElement text={`${bun.name} (низ)`} isLocked={true} type='bottom' thumbnail={bun.image} price={bun.price}/>
+                                <ConstructorElement text={`${bun.name} (низ)`} isLocked={true} type='bottom'
+                                                    thumbnail={bun.image} price={bun.price}/>
                             )
                         }
                     </div>
@@ -103,7 +106,7 @@ export default function BurgerConstructor(): JSX.Element {
                             }));
                         }
                     }}
-                            disabled={cards.length === 0 || !cards.find((item: TIngredient) : boolean => item.type === "bun")}
+                            disabled={cards.length < 2 || !bun}
                             htmlType="button" type="primary" size="large">
                         Оформить заказ
                     </Button>

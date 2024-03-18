@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice, PayloadAction, SerializedError} from "@re
 import {postLoginRequest, postRegisterProfileRequest} from "../utils/auth";
 import {getRefreshTokenRequest} from "../utils/token";
 import {postLogoutRequest} from "../utils/logout";
-import {UserResponseToken} from "../utils/types/types";
+import {AuthResponse, TMessageResponse, UserResponseToken} from "../utils/types/types";
 
 type TInitialState = {
     isLoading: boolean,
@@ -10,7 +10,7 @@ type TInitialState = {
     success: boolean;
     accessToken: string | null;
     refreshToken: string | null;
-    message: "";
+    message: string | null;
 }
 
 const initialState: TInitialState = {
@@ -57,8 +57,8 @@ const Register = createSlice({
                 state.error = null;
             })
             .addCase(fetchRegisterProfileResult.fulfilled.type, handleLogin)
-            .addCase(fetchRegisterProfileResult.rejected.type, (state, action: any) => {
-                state.error = action.payload;
+            .addCase(fetchRegisterProfileResult.rejected.type, (state, action: PayloadAction<TMessageResponse>) => {
+                state.error = action.payload.message ? Error(action.payload.message) : null;
                 state.isLoading = false;
             })
             .addCase(fetchLoginResult.pending.type, state => {
@@ -66,31 +66,31 @@ const Register = createSlice({
                 state.error = null;
             })
             .addCase(fetchLoginResult.fulfilled.type, handleLogin)
-            .addCase(fetchLoginResult.rejected.type, (state, action: any) => {
-                state.error = action.payload;
+            .addCase(fetchLoginResult.rejected.type, (state, action: PayloadAction<TMessageResponse>) => {
+                state.error = action.payload.message ? Error(action.payload.message) : null;
                 state.isLoading = false;
             })
             .addCase(fetchLogoutResult.pending.type, (state, action) => {
                 state.isLoading = true;
                 state.error = null;
             })
-            .addCase(fetchLogoutResult.fulfilled.type, (state, action: any) => {
-                state.message = action.payload.message;
+            .addCase(fetchLogoutResult.fulfilled.type, (state, action: PayloadAction<TMessageResponse>) => {
+                state.message = action.payload.message ? action.payload.message : null;
                 state.isLoading = false;
                 state.accessToken = '';
                 state.refreshToken = '';
                 localStorage.removeItem('accessToken');
                 localStorage.removeItem('refreshToken');
             })
-            .addCase(fetchLogoutResult.rejected.type, (state, action: any) => {
-                state.error = action.payload;
+            .addCase(fetchLogoutResult.rejected.type, (state, action: PayloadAction<TMessageResponse>) => {
+                state.error = action.payload.message ? Error(action.payload.message) : null;
                 state.isLoading = false;
             })
             .addCase(fetchRefreshTokenResult.pending.type, state => {
                 state.isLoading = true;
                 state.error = null;
             })
-            .addCase(fetchRefreshTokenResult.fulfilled.type, (state, action: any) => {
+            .addCase(fetchRefreshTokenResult.fulfilled.type, (state, action: PayloadAction<AuthResponse>) => {
                 state.accessToken = action.payload.accessToken;
                 state.refreshToken = action.payload.refreshToken;
                 state.success = action.payload.success;

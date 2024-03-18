@@ -7,7 +7,7 @@ import clsx from "clsx";
 import {useAppDispatch} from "../../utils/types/types";
 
 export default function LogIn(): JSX.Element {
-    const dispatch = useAppDispatch;
+    const dispatch = useAppDispatch();
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')

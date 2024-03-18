@@ -1,6 +1,6 @@
-import {createAsyncThunk, createSlice, SerializedError} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction, SerializedError} from "@reduxjs/toolkit";
 import {fetchCard} from "../utils/api";
-import {TIngredient} from "../utils/types/types";
+import {TIngredient, TMessageResponse} from "../utils/types/types";
 
 type TInitialState = {
     cardsArray: TIngredient[];
@@ -31,12 +31,12 @@ const cardsSlice = createSlice({
                 state.isLoading = true;
                 state.error = null;
             })
-            .addCase(getIngredients.fulfilled.type, (state, action: any) => {
+            .addCase(getIngredients.fulfilled.type, (state, action: PayloadAction<TIngredient[]>) => {
                 state.cardsArray = action.payload;
                 state.isLoading = false;
             })
-            .addCase(getIngredients.rejected.type, (state, action: any) => {
-                state.error = action.payload;
+            .addCase(getIngredients.rejected.type, (state, action: PayloadAction<TMessageResponse>) => {
+                state.error = action.payload.message ? Error(action.payload.message) : null;
                 state.isLoading = false;
             })
     }
