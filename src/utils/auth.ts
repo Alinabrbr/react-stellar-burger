@@ -1,13 +1,13 @@
 import {request, requestWithRefresh} from "./api";
 import {UserResponse, UserResponseToken} from "./types/types";
 
-type TNEP = {
+export type TProfileRequest = {
     name: string;
     email: string;
     password: string;
 }
 
-type TEP = {
+type TLoginRequest = {
     email: string;
     password: string;
 }
@@ -37,7 +37,7 @@ export const postResetPasswordRequest = ({password, token}: TPostResetPasswordRe
     })
 }
 
-export const postRegisterProfileRequest = ({name, email, password}: TNEP) => {
+export const postRegisterProfileRequest = ({name, email, password}: TProfileRequest) => {
     return request<UserResponseToken>(`/auth/register`, {
         method: "POST",
         body: JSON.stringify({name, email, password}),
@@ -47,7 +47,7 @@ export const postRegisterProfileRequest = ({name, email, password}: TNEP) => {
     })
 }
 
-export const postLoginRequest = ({email, password}: TEP) => {
+export const postLoginRequest = ({email, password}: TLoginRequest) => {
     return requestWithRefresh<UserResponseToken>(`/auth/login`, {
         method: "POST",
         body: JSON.stringify({email, password}),
@@ -57,19 +57,19 @@ export const postLoginRequest = ({email, password}: TEP) => {
     })
 }
 
-export const getInfoProfileRequest = (token: string) => {
+export const getInfoProfileRequest = () => {
     return requestWithRefresh<UserResponse>(`/auth/user`, {
         method: "GET",
         headers: {
             "Content-Type": 'application/json',
-            "Authorization": token || "",
+            "Authorization": localStorage.getItem("accessToken") || "",
         } as HeadersInit,
     });
 }
 
 
-export const getEditInfoProfileRequest = ({ name, email, password}: TNEP): Promise<any> => {
-    return requestWithRefresh(`/auth/user`, {
+export const getEditInfoProfileRequest = ({name, email, password}: TProfileRequest): Promise<any> => {
+    return requestWithRefresh<UserResponse>(`/auth/user`, {
         method: "PATCH",
         body: JSON.stringify({ name, email, password}),
         headers: {

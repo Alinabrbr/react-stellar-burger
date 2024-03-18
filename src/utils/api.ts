@@ -1,4 +1,4 @@
-import {TIngredient, UserResponseToken} from "./types/types";
+import {UserResponseToken} from "./types/types";
 
 export const urlApi = "https://norma.nomoreparties.space/api";
 
@@ -7,7 +7,7 @@ export const fetchCard = (): Promise<any> => {
 }
 
 type TPostOrderRequest = {
-    ingredients: TIngredient[];
+    ingredients: string[];
     token: string;
 }
 

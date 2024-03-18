@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice, PayloadAction, SerializedError} from "@reduxjs/toolkit";
+import {createSlice, createAsyncThunk, PayloadAction, SerializedError} from "@reduxjs/toolkit";
 import {getEditInfoProfileRequest, getInfoProfileRequest} from "../utils/auth";
 import {UserResponse} from "../utils/types/types";
 
@@ -20,13 +20,6 @@ export const fetchInfoProfileResult = createAsyncThunk(
     `profileInfo/fetchInfoProfileResult`,
     getInfoProfileRequest
 );
-
-// export const fetchEditInfoProfileResult = createAsyncThunk(
-//     `profileInfo/fetchEditInfoProfileResult`,
-//     async ({name, email, password}) => {
-//         return await getEditInfoProfileRequest({name, email, password}).then((data) => data);
-//     }
-// );
 
 export const fetchEditInfoProfileResult = createAsyncThunk(
     `profileInfo/fetchEditInfoProfileResult`,
@@ -63,12 +56,12 @@ const profileInfo = createSlice({
                 state.error = null;
             })
             .addCase(fetchEditInfoProfileResult.fulfilled.type, (state, action: PayloadAction<UserResponse>) => {
-                state.name = action.payload.user.name;
-                state.email = action.payload.user.email;
+                state.name = action.payload.user?.name || "";
+                state.email = action.payload.user?.email || "";
                 state.isLoading = false;
             })
-            .addCase(fetchEditInfoProfileResult.rejected.type, (state, action: any) => {
-                state.error = action.payload;
+            .addCase(fetchEditInfoProfileResult.rejected.type, (state, action: PayloadAction<UserResponse>) => {
+                state.error = action.payload.message ? Error(action.payload.message) : null;
                 state.isLoading = false;
             })
     }

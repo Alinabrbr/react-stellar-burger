@@ -35,11 +35,10 @@ export type UserDto = {
     name: string;
 }
 
-export type UserResponse = {
-    success: boolean;
-} & {
-    user: UserDto;
-}
+export type UserResponse = ServerResponse<{
+    user: UserDto|null;
+    message: string|null;
+}>
 
 type ServerResponse<T> = {
     success: boolean;

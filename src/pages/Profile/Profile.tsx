@@ -19,7 +19,7 @@ export default function Profile(): JSX.Element {
     const profileInfo = useAppSelector((state) => state.profileInfo);
 
     useEffect(() => {
-        dispatch(fetchInfoProfileResult(accessToken));
+        dispatch(fetchInfoProfileResult());
     }, [dispatch])
 
     const [form, setForm] = useState({
@@ -42,8 +42,8 @@ export default function Profile(): JSX.Element {
 
     function editProfile(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
+
         dispatch(fetchEditInfoProfileResult({
-            token: accessToken,
             name: form.name,
             email: form.email,
             password: form.password

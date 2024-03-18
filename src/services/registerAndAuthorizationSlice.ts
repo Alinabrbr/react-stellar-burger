@@ -37,13 +37,6 @@ export const fetchLogoutResult = createAsyncThunk(
     postLogoutRequest
 );
 
-// export const fetchRefreshTokenResult = createAsyncThunk(
-//     `token/fetchRefreshTokenResult`,
-//     async (token) => {
-//         return await getRefreshTokenRequest(token).then((data) => data);
-//     }
-// );
-
 export const fetchRefreshTokenResult = createAsyncThunk(
     `token/fetchRefreshTokenResult`,
     getRefreshTokenRequest

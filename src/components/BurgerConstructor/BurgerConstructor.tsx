@@ -41,7 +41,7 @@ export default function BurgerConstructor(): JSX.Element {
     };
 
     const clearStoreBurgerConstructor = (): void => {
-        dispatch(clearStore(''));
+        dispatch(clearStore());
     }
 
     const [, dropRef] = useDrop({
@@ -96,7 +96,12 @@ export default function BurgerConstructor(): JSX.Element {
                             )
                         }
                         openModal();
-                        dispatch(fetchOrderResult({ingredients: [...cards.map((ingredient:TIngredient) => ingredient._id), bun?._id], token: accessToken}));
+                        if (bun) {
+                            dispatch(fetchOrderResult({
+                                ingredients: [...cards.map((ingredient) => ingredient._id), bun._id],
+                                token: accessToken
+                            }));
+                        }
                     }}
                             disabled={cards.length === 0 || !cards.find((item: TIngredient) : boolean => item.type === "bun")}
                             htmlType="button" type="primary" size="large">
