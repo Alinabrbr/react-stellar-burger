@@ -1,1 +1,0 @@
-export const constructorSelector = store => store.burgerConstructor.constructorIngredient;
