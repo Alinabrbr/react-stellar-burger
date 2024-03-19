@@ -12,7 +12,7 @@ export default function LogIn(): JSX.Element {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    function login(event:  React.ChangeEvent<HTMLFormElement>) {
+    function login(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         dispatch(fetchLoginResult({email: email, password: password}));
     }

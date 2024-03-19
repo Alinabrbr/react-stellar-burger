@@ -3,10 +3,9 @@ import clsx from "clsx";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./ConstructorElementBun.module.css";
 import {useDrag, useDrop} from "react-dnd";
-import {useDispatch, useSelector} from "react-redux";
 import {constructorSelector} from "../../services/constructorSelector";
 import {sortIngredients} from "../../services/constructorSlice";
-import {TIngredient} from "../../utils/types/types";
+import {TIngredient, useAppDispatch, useAppSelector} from "../../utils/types/types";
 
 type TElementBunProps = {
     card: TIngredient;
@@ -24,8 +23,8 @@ type TCollectedProps = {
 
 export default function ConstructorElementBun({card, index, handleClose}:TElementBunProps ) {
 
-    const burgerConstructor = useSelector(constructorSelector);
-    const dispatch = useDispatch();
+    const burgerConstructor = useAppSelector(constructorSelector);
+    const dispatch = useAppDispatch();
 
     const searchIndex = (ingredient: TIngredient) => {
         return burgerConstructor.indexOf(ingredient);

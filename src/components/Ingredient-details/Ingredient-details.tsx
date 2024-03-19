@@ -1,22 +1,13 @@
-import React, {useEffect} from "react";
+import React from "react";
 import styles from './Ingredient-details.module.css'
 import {useParams} from "react-router-dom";
-import {useDispatch} from "react-redux";
 import {getCards, getCardsLoading} from "../../services/cardsSelector";
-import {getIngredients} from "../../services/cardsSlice";
 import {TIngredient, useAppSelector} from "../../utils/types/types";
 
 export default function IngredientDetails() : JSX.Element {
-    const dispatch = useDispatch();
     const {id} = useParams();
     const isCardsLoading = useAppSelector(getCardsLoading);
     const cards: TIngredient[] = useAppSelector(getCards);
-
-    useEffect(():void => {
-        if (!cards) {
-            dispatch(getIngredients());
-        }
-    }, [dispatch]);
 
     const el: TIngredient | undefined = cards.find((item: TIngredient): boolean => item._id === id);
 
