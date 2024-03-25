@@ -1,7 +1,7 @@
 import React from "react";
 import {Navigate} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {getAccessToken} from "../../services/tokenSelector";
+import {getAccessToken} from "../../services/actions/actionsSelector";
 
 type TProtected = {
     unauthOnly: boolean;

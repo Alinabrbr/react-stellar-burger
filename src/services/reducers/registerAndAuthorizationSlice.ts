@@ -1,8 +1,8 @@
 import {createAsyncThunk, createSlice, PayloadAction, SerializedError} from "@reduxjs/toolkit";
-import {postLoginRequest, postRegisterProfileRequest} from "../utils/auth";
-import {getRefreshTokenRequest} from "../utils/token";
-import {postLogoutRequest} from "../utils/logout";
-import {AuthResponse, TMessageResponse, UserResponseToken} from "../utils/types/types";
+import {postLoginRequest, postRegisterProfileRequest} from "../../utils/auth";
+import {getRefreshTokenRequest} from "../../utils/token";
+import {postLogoutRequest} from "../../utils/logout";
+import {AuthResponse, TMessageResponse, UserResponseToken} from "../../utils/types/types";
 
 type TInitialState = {
     isLoading: boolean,

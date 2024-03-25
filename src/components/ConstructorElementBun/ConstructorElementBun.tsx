@@ -3,8 +3,8 @@ import clsx from "clsx";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./ConstructorElementBun.module.css";
 import {useDrag, useDrop} from "react-dnd";
-import {constructorSelector} from "../../services/constructorSelector";
-import {sortIngredients} from "../../services/constructorSlice";
+import {constructorSelector} from "../../services/actions/actionsSelector";
+import {sortIngredients} from "../../services/reducers/constructorSlice";
 import {TIngredient, useAppDispatch, useAppSelector} from "../../utils/types/types";
 
 type TElementBunProps = {

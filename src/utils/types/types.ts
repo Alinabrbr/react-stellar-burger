@@ -19,6 +19,22 @@ export type TIngredient = {
     isLocked?: boolean;
 }
 
+export type TOrders = {
+    success: boolean;
+    orders: [TOrder];
+    total: number;
+    totalToday: number;
+}
+
+export type TOrder = {
+    ingredients: string[],
+    _id: string;
+    status: string;
+    number: number;
+    createdAt: string;
+    updatedAt: string;
+}
+
 export type TMessageResponse = ServerResponse<{
     message: string | null;
 }>

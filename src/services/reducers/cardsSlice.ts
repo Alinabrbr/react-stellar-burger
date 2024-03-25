@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction, SerializedError} from "@reduxjs/toolkit";
-import {fetchCard} from "../utils/api";
-import {TIngredient, TMessageResponse} from "../utils/types/types";
+import {fetchCard} from "../../utils/api";
+import {TIngredient, TMessageResponse} from "../../utils/types/types";
 
 type TInitialState = {
     cardsArray: TIngredient[];

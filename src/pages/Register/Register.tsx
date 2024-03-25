@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, Navigate} from "react-router-dom";
-import {fetchRegisterProfileResult} from "../../services/registerAndAuthorizationSlice";
+import {fetchRegisterProfileResult} from "../../services/reducers/registerAndAuthorizationSlice";
 import clsx from "clsx";
 import styles from "../Register/Register.module.css";
 import {useAppDispatch} from "../../utils/types/types";

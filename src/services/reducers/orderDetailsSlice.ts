@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk, SerializedError} from '@reduxjs/toolkit';
-import {postOrderRequest} from "../utils/api";
+import {postOrderRequest} from "../../utils/api";
 
 type TInitialState = {
     order: any;

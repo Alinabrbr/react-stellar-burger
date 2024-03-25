@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk, PayloadAction, SerializedError} from "@reduxjs/toolkit";
-import {getEditInfoProfileRequest, getInfoProfileRequest} from "../utils/auth";
-import {UserResponse} from "../utils/types/types";
+import {getEditInfoProfileRequest, getInfoProfileRequest} from "../../utils/auth";
+import {UserResponse} from "../../utils/types/types";
 
 type TInitialState = {
     isLoading: boolean;

@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import styles from "./App.module.css";
 import LayoutHeader from "../Layout-header/Layout-header";
-import {getIngredients} from "../../services/cardsSlice";
+import {getIngredients} from "../../services/reducers/cardsSlice";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import Profile from "../../pages/Profile/Profile";
 import LogIn from "../../pages/Log-in/Log-in";
@@ -16,6 +16,9 @@ import IngredientDetails from "../Ingredient-details/Ingredient-details";
 import Modal from "../Modal/Modal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import {useAppDispatch} from "../../utils/types/types";
+import OrderFeed from "../../pages/OrderFeed/OrderFeed";
+import ProfileOrders from "../../pages/ProfileOrders/ProfileOrders";
+import ProfileEdit from "../../pages/ProfileEdit/ProfileEdit";
 
 function App(): JSX.Element {
 
@@ -48,8 +51,14 @@ function App(): JSX.Element {
                                element={<ProtectedRoute unauthOnly={true}><ForgotPassword/></ProtectedRoute>}/>
                         <Route path="reset-password"
                                element={<ProtectedRoute unauthOnly={true}><ResetPassword/></ProtectedRoute>}/>
-                        <Route path="profile" element={<ProtectedRoute children={<Profile/>} unauthOnly={false}/>}/>
+                        <Route path="profile" element={<ProtectedRoute children={<Profile/>} unauthOnly={false}/>}>
+                            <Route path="/profile" element={<ProfileEdit/>} />
+                            <Route path="/profile/orders" element={<ProfileOrders/>} />
+                            {/*<Route path="profile/orders/:id" element={<OrderDetails/>}/>*/}
+                        </Route>
                         <Route path="ingredients/:id" element={<IngredientDetails/>}/>
+                        <Route path="feed" element={<OrderFeed/>}/>
+                        {/*<Route path="feed/:id" element={<FeedDetails/>}/>*/}
                         <Route path="*" element={<NotFound/>}/>
                     </Route>
                 </Routes>

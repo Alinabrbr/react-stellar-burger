@@ -1,0 +1,16 @@
+.profileInfo{
+  margin-right: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 120px;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.input::placeholder {
+  color: #8585AD;
+}

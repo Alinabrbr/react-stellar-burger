@@ -3,7 +3,7 @@ import styles from './Order-details.module.css';
 import imgIcon from '../../images/icon-modal-done.png';
 import clsx from "clsx";
 import {useSelector} from "react-redux";
-import {getOrderDetailsSelector} from "../../services/orderDetailsSelector";
+import {getOrderDetailsSelector} from "../../services/actions/actionsSelector";
 
 export default function OrderDetails(): JSX.Element {
 

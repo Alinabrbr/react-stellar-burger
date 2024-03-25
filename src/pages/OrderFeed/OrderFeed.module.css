@@ -1,0 +1,43 @@
+.main {
+  min-width: max-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.sectionOrders {
+  max-width: 600px;
+  height: calc(100vh - 88px);
+}
+
+.sectionOrdersInfo {
+  max-height: 900px;
+  min-height: 300px;
+  min-width: 600px;
+}
+
+.ordersContainer {
+  max-height: 664px;
+  overflow-y: scroll;
+}
+
+.ordersContainer::-webkit-scrollbar {
+  width: 8px;
+}
+.ordersContainer::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+.ordersContainer::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
+.orders {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 584px);
+  grid-template-rows: 214px;
+  grid-auto-rows: 214px;
+  gap: 16px 0;
+  list-style: none;
+}

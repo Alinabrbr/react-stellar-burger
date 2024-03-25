@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Button, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, Navigate, useLocation, useNavigate} from "react-router-dom";
-import {fetchResetPasswordResult} from "../../services/resetPasswordSlice";
+import {fetchResetPasswordResult} from "../../services/reducers/resetPasswordSlice";
 import styles from "../Register/Register.module.css";
 import clsx from "clsx";
 import {useAppDispatch, useAppSelector} from "../../utils/types/types";
