@@ -1,9 +1,12 @@
 import React from "react";
 import styles from "../Order/Order.module.css";
+import {FormattedDate} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, Location, useLocation} from "react-router-dom";
-import {TOrder} from "../../utils/types/types";
+import {TIngredient, TOrder, useAppSelector} from "../../utils/types/types";
 import Price from "../Price/Price";
 import clsx from "clsx";
+import OrderFeedIngredient from "../OrderFeed-ingredient/OrderFeed-ingredient";
+import {getCards} from "../../services/actions/actionsSelector";
 
 type TOrderProps = {
     order: TOrder;
@@ -15,16 +18,21 @@ export default function Order({order, priceSize, ingredients}: TOrderProps): JSX
 
     const location: Location = useLocation();
 
-    // function calculatePrice (order: TOrders, ingredients: string[]): number{
-    //     let totalPrice = 0;
-    //     order.ingredients.forEach((id: string) => {
-    //         const ingredient = ingredients.find((item: string) => item._id === id);
-    //         if (ingredient) {
-    //             totalPrice += ingredient.price;
-    //         }
-    //     });
-    //     return totalPrice;
-    // }
+    const allIngredients = useAppSelector(getCards);
+
+    const calculatePriceOrder = (
+        order: TOrder,
+        ingredients: TIngredient[]
+    ): number => {
+        let totalPrice = 0;
+        order.ingredients.forEach((id) => {
+            const ingredient = ingredients.find((item) => item._id === id);
+            if (ingredient) {
+                totalPrice += ingredient.price;
+            }
+        });
+        return totalPrice;
+    };
 
     return (
         <>
@@ -32,34 +40,32 @@ export default function Order({order, priceSize, ingredients}: TOrderProps): JSX
                 <Link className={clsx(styles.orderLink, "p-6")} to={`/profile/orders/${order._id}`} key={order._id} state={{background: location}}>
                     <div className={styles.orderHeader}>
                         <p className="text text_type_digits-default">{`#${order.number}`}</p>
-                        <p className="text text_type_main-default text_color_inactive">Дата, 17:00 15.15.1515</p>
+                        <p className="text text_type_main-default text_color_inactive">
+                            <FormattedDate date={new Date(order.createdAt)} /> i-GMT+3
+                        </p>
                     </div>
-                    <p className={"text text_type_main-medium"}>Название бургера</p>
+                    <p className={clsx(styles.orderText, "text text_type_main-medium")}>{order.name}</p>
                     {/*{status? <p>className={"text text_type_main-medium"}>{order.status}</p> : ""} нужно выводить только в истории заказов пользователя в профиле(дописать правильное условие)*/}
                     <div className={styles.orderFooter}>
                         <div className={styles.iconsList}>
                             {
                                 ingredients.slice(0, 5).map((ingredient, index) => {
                                     return (
-                                        <div key={index} className={styles.iconContainer}>
-                                            {/*<img alt={ingredient.name} src={ingredient.image} className={styles.icon}></img>*/}
-                                            <img alt="dfdgf" src="../../images/icon-modal-done.png"></img>
-                                        </div>
+                                            <OrderFeedIngredient
+                                                key={index}
+                                                ingredient={ingredient}
+                                                counter={
+                                                    index === 5
+                                                        ? order.ingredients.length - 5
+                                                        : undefined
+                                                }
+                                            />
                                     )
                                 })
                             }
-                            {
-                                ingredients.length > 5 && (
-                                    <div className={clsx(styles.iconContainer, styles.count)}>
-                                        <img alt="количество остальных ингредиентов" src={"https://code.s3.yandex.net/react/code/cheese.png"}
-                                             className={styles.icon}></img>
-                                        <p className={clsx(styles.countText, "text text_type_main-default")}>{`+${ingredients.length - 5}`}</p>
-                                    </div>
-                                )
-                            }
 
                         </div>
-                        <Price price={252} priceSize={priceSize}/>
+                        <Price price={calculatePriceOrder(order, allIngredients)} priceSize={priceSize}/>
                     </div>
                 </Link>
             </li>

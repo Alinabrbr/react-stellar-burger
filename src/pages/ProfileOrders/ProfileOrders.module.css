@@ -1,4 +1,4 @@
-.sectionOrders {
+.section {
   max-width: 600px;
   height: calc(100vh - 88px);
   margin-top: 0;
@@ -10,8 +10,8 @@
   min-width: 600px;
 }
 
-.ordersContainer {
-  max-height: 664px;
+.container {
+  max-height: 800px;
   overflow-y: scroll;
 }
 

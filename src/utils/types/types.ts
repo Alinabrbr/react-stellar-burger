@@ -33,6 +33,8 @@ export type TOrder = {
     number: number;
     createdAt: string;
     updatedAt: string;
+    name?: string;
+    price?: number;
 }
 
 export type TMessageResponse = ServerResponse<{
@@ -64,6 +66,16 @@ type ServerResponse<T> = {
 
 export type UserResponseToken = ServerResponse<{
     user: UserDto;
+    accessToken: string;
+    refreshToken: string;
+}>;
+
+export type wsConnect = {
+    wsUrl: string;
+    withTokenRefresh: boolean;
+};
+
+export type RefreshResponseWithTokenType = ServerResponse<{
     accessToken: string;
     refreshToken: string;
 }>;

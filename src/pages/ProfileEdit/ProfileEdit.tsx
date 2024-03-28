@@ -3,14 +3,12 @@ import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-deve
 import styles from "../ProfileEdit/ProfileEdit.module.css"
 import {fetchEditInfoProfileResult, fetchInfoProfileResult} from "../../services/reducers/getInfoProfileSlice";
 import {useAppDispatch, useAppSelector} from "../../utils/types/types";
+import clsx from "clsx";
 
 
 export default function ProfileEdit(): JSX.Element {
 
-    // const getActiveClass = ({isActive}: { isActive: boolean }) => isActive ? styles.active : styles.inactive;
-
     const dispatch = useAppDispatch();
-    // const refreshToken = localStorage.getItem("refreshToken");
 
     const profileInfo = useAppSelector((state) => state.profileInfo);
 
@@ -59,10 +57,10 @@ export default function ProfileEdit(): JSX.Element {
     };
 
     return (
-            // {profileInfo.isLoading ?
-            //     <h1 className={clsx(styles.text, 'text_type_main-medium')}>Данные загружаются...</h1>
-            //         :
-                    <form className={styles.profileInfo} onSubmit={(e) => editProfile(e)}>
+            profileInfo.isLoading ?
+                <h1 className={clsx(styles.text, 'text_type_main-medium')}>Данные загружаются...</h1>
+                :
+                <form className={styles.profileInfo} onSubmit={(e) => editProfile(e)}>
                     <Input extraClass={styles.input} name="name" type={'text'} placeholder={'Имя'} value={form.name}
                            autoComplete="name"
                            onChange={updateInput}
@@ -92,6 +90,5 @@ export default function ProfileEdit(): JSX.Element {
                         </Button>
                     </div>
                 </form>
-        // }
     )
 }

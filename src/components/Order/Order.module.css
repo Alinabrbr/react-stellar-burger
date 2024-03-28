@@ -10,6 +10,12 @@
   border-radius: 40px;
 }
 
+.orderText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .orderHeader {
   display: flex;
   flex-direction: row;

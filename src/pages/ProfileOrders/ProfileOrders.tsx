@@ -81,8 +81,8 @@ export default function ProfileOrders(): JSX.Element {
 
     return (
         <main className={styles.main}>
-            <section className={clsx(styles.sectionOrders, 'pr-10, ml-4')}>
-                <div className={styles.ordersContainer}>
+            <section className={clsx(styles.section, 'pr-10, ml-4')}>
+                <div className={styles.container}>
                     <ul className={clsx(styles.orders, 'mt-6')}>
                         {orderRequestInfo.orders.map((order: TOrder) => (
                             <Order priceSize={"default"} order={order} key={order._id}

@@ -12,3 +12,9 @@ export const getOrderDetailsSelector = (store: RootState) => store.orderDetails;
 export const totalPriceSelector = (store: RootState) => store.burgerConstructor.totalPrice;
 
 export const getAccessToken = (store: RootState) => store.accessToken.accessToken;
+
+export const ordersSelector = (store: RootState) => store.wsOrders.orders;
+
+export const totalSelector = (store: RootState) => store.wsOrders.total;
+
+export const totalTodaySelector = (store: RootState) => store.wsOrders.totalToday;
