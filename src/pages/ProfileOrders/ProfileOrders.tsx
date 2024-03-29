@@ -1,92 +1,39 @@
 import clsx from "clsx";
 import styles from "./ProfileOrders.module.css";
-import React from "react";
+import React, {useEffect} from "react";
 import Order from "../../components/Order/Order";
-import {TOrder} from "../../utils/types/types";
+import {TOrder, useAppDispatch, useAppSelector} from "../../utils/types/types";
+import {userOrdersSelector} from "../../services/actions/actionsSelector";
+import {wsConnectUserOrders, wsDisconnectUserOrders} from "../../services/actions/actionsUserOrders";
 
 export default function ProfileOrders(): JSX.Element {
 
-    const orderRequestInfo = {
-        "success": true,
-        "orders": [
-            {
-                "ingredients": [
-                    "60d3463f7034a000269f45e7",
-                    "60d3463f7034a000269f45e9",
-                    "60d3463f7034a000269f45e8",
-                    "60d3463f7034a000269f45ea"
-                ],
-                "_id": "1",
-                "status": "not",
-                "number": 0,
-                "createdAt": "2021-06-23T14:43:22.587Z",
-                "updatedAt": "2021-06-23T14:43:22.603Z"
-            },
-            {
-                "ingredients": [
-                    "60d3463f7034a000269f45e7",
-                    "60d3463f7034a000269f45e9",
-                    "60d3463f7034a000269f45e8",
-                    "60d3463f7034a000269f45ea"
-                ],
-                "_id": "2",
-                "status": "not",
-                "number": 0,
-                "createdAt": "2021-06-23T14:43:22.587Z",
-                "updatedAt": "2021-06-23T14:43:22.603Z"
-            },
-            {
-                "ingredients": [
-                    "60d3463f7034a000269f45e7",
-                    "60d3463f7034a000269f45e9",
-                    "60d3463f7034a000269f45e8",
-                    "60d3463f7034a000269f45ea"
-                ],
-                "_id": "3",
-                "status": "not",
-                "number": 0,
-                "createdAt": "2021-06-23T14:43:22.587Z",
-                "updatedAt": "2021-06-23T14:43:22.603Z"
-            },
-            {
-                "ingredients": [
-                    "60d3463f7034a000269f45e7",
-                    "60d3463f7034a000269f45e9",
-                    "60d3463f7034a000269f45e8",
-                    "60d3463f7034a000269f45ea"
-                ],
-                "_id": "4",
-                "status": "not",
-                "number": 0,
-                "createdAt": "2021-06-23T14:43:22.587Z",
-                "updatedAt": "2021-06-23T14:43:22.603Z"
-            },
-            {
-                "ingredients": [
-                    "60d3463f7034a000269f45e7",
-                    "60d3463f7034a000269f45e9",
-                    "60d3463f7034a000269f45e8",
-                    "60d3463f7034a000269f45ea"
-                ],
-                "_id": "5",
-                "status": "not",
-                "number": 0,
-                "createdAt": "2021-06-23T14:43:22.587Z",
-                "updatedAt": "2021-06-23T14:43:22.603Z"
-            }
-        ],
-        "total": 1,
-        "totalToday": 1
-    }
+    const dispatch = useAppDispatch();
+    const wsUrl = "wss://norma.nomoreparties.space/orders";
+    const userOrders = useAppSelector(userOrdersSelector);
+    const accessToken = localStorage.getItem("accessToken");
+    const orders = [...userOrders].reverse();
+
+    useEffect(() => {
+        dispatch(
+            wsConnectUserOrders({
+                wsUrl: `${wsUrl}?token=${accessToken?.replace("Bearer ", "")}`,
+                withTokenRefresh: true,
+            })
+        );
+        return () => {
+            dispatch(wsDisconnectUserOrders());
+        };
+    }, [dispatch]);
 
     return (
         <main className={styles.main}>
             <section className={clsx(styles.section, 'pr-10, ml-4')}>
                 <div className={styles.container}>
                     <ul className={clsx(styles.orders, 'mt-6')}>
-                        {orderRequestInfo.orders.map((order: TOrder) => (
+                        {orders.map((order: TOrder) => (
                             <Order priceSize={"default"} order={order} key={order._id}
-                                   ingredients={order.ingredients}/>
+                                   ingredients={order.ingredients} url={"/profile/orders"} showStatus={true} />
                         ))}
                     </ul>
                 </div>

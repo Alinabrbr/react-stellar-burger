@@ -1,6 +1,7 @@
 import {TIngredient, useAppSelector} from "../../utils/types/types";
 import styles from "./OrderFeed-ingredient.module.css";
 import {getCards} from "../../services/actions/actionsSelector";
+import clsx from "clsx";
 
 interface IngredientIconProps {
     ingredient: string;
@@ -25,7 +26,7 @@ export default function OrderFeedIngredient({ ingredient, counter }: IngredientI
             />
             {counter ? (
                 <p
-                    className={`${styles.counter} text text_type_main-default`}
+                    className={clsx(styles.counter, "text text_type_main-default")}
                 >{`+${counter}`}</p>
             ) : null}
         </div>

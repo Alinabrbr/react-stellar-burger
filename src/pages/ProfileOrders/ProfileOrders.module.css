@@ -28,8 +28,6 @@
 .orders {
   display: grid;
   grid-template-columns: repeat(auto-fill, 584px);
-  grid-template-rows: 214px;
-  grid-auto-rows: 214px;
-  gap: 16px 0;
+  gap: 24px 0;
   list-style: none;
 }

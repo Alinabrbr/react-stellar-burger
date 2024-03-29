@@ -18,3 +18,5 @@ export const ordersSelector = (store: RootState) => store.wsOrders.orders;
 export const totalSelector = (store: RootState) => store.wsOrders.total;
 
 export const totalTodaySelector = (store: RootState) => store.wsOrders.totalToday;
+
+export const userOrdersSelector = (store: RootState) => store.wsUserOrders.orders;

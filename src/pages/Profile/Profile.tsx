@@ -13,6 +13,8 @@ export default function Profile(): JSX.Element {
 
     const dispatch = useAppDispatch();
 
+    const currentPath = window.location.pathname;
+
     return (
         <div className={styles.container}>
             <div className={styles.profile}>
@@ -32,9 +34,15 @@ export default function Profile(): JSX.Element {
                         <p className={clsx(styles.text, getActiveClass, 'text_type_main-medium mt-4 mb-4')}>Выход</p>
                     </NavLink>
 
-                    <p className={clsx(styles.text, styles.textOpacity, 'text_type_main-default mt-20')}>
-                        В этом разделе вы можете изменить свои персональные данные
-                    </p>
+                    {currentPath === '/profile' ?
+                        <p className={clsx(styles.text, styles.textOpacity, 'text_type_main-default mt-20')}>
+                            В этом разделе вы можете изменить свои персональные данные
+                        </p>
+                        :
+                        <p className={clsx(styles.text, styles.textOpacity, 'text_type_main-default mt-20')}>
+                            В этом разделе вы можете просмотреть свою историю заказов
+                        </p>
+                    }
                 </nav>
 
                 <div className={styles.content}>
