@@ -2,12 +2,12 @@ import React from "react";
 import styles from './Order-details.module.css';
 import imgIcon from '../../images/icon-modal-done.png';
 import clsx from "clsx";
-import {useSelector} from "react-redux";
 import {getOrderDetailsSelector} from "../../services/actions/actionsSelector";
+import {useAppSelector} from "../../utils/types/types";
 
 export default function OrderDetails(): JSX.Element {
 
-    const {order, loading, error} = useSelector(getOrderDetailsSelector);
+    const {order, loading, error} = useAppSelector(getOrderDetailsSelector);
 
     return (
             <div className={clsx(styles.modalContainer, 'mt-20 mb-15')}>

@@ -3,7 +3,7 @@ import styles from "./OrderFeed.module.css";
 import React, {useEffect} from "react";
 import Order from "../../components/Order/Order";
 import OrdersInfo from "../../components/OrdersInfo/OrdersInfo";
-import {TOrder, useAppDispatch, useAppSelector} from "../../utils/types/types";
+import {useAppDispatch, useAppSelector} from "../../utils/types/types";
 import {wsConnectOrderFeed, wsDisconnectOrderFeed} from "../../services/actions/actionsFeed";
 import {ordersSelector} from "../../services/actions/actionsSelector";
 
@@ -30,7 +30,7 @@ export default function OrderFeed(): JSX.Element {
                 <h1 className='text text_type_main-large mt-10 mb-5'>Лента заказов</h1>
                 <div className={styles.ordersContainer}>
                     <ul className={clsx(styles.orders, 'mt-6')}>
-                        {orders.map((order: TOrder) => (
+                        {orders.map((order) => (
                             <Order priceSize={"default"} order={order} key={order._id}
                                    ingredients={order.ingredients} url={"/feed"}/>
                         ))}
