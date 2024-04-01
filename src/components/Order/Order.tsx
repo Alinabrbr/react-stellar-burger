@@ -26,7 +26,7 @@ export default function Order({order, priceSize, ingredients, url, showStatus = 
     return (
         <>
             <li className={styles.order}>
-                <Link className={clsx(styles.orderLink, "p-6")} to={`${url}/${order._id}`} key={order._id} state={{background: location}}>
+                <Link className={clsx(styles.orderLink, "p-6")} to={`${url}/${order.number}`} key={order.number} state={{background: location}}>
                     <div className={styles.orderHeader}>
                         <p className="text text_type_digits-default">{`#${order.number}`}</p>
                         <p className="text text_type_main-default text_color_inactive">

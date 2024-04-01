@@ -11,6 +11,7 @@ import profileInfoReducer from "./reducers/getInfoProfileSlice";
 import {socketMiddleware} from "./middleware/socket-middleware";
 import wsSliceOrderFeed, {wsCloseOrderFeed, wsErrorOrderFeed, wsOpenOrderFeed, wsMessageOrderFeed} from "./reducers/wsOrderFeedSlice";
 import wsSliceUserOrders, {wsCloseUserOrders, wsErrorUserOrders, wsOpenUserOrders, wsMessageUserOrders} from "./reducers/wsUserOrdersSlice";
+import orderInfoReducer from "./reducers/orderIdInfoSlice";
 import {urlApi} from "../utils/api";
 import {
     wsConnectingOrderFeed,
@@ -59,6 +60,7 @@ export const store = configureStore({
         profileInfo: profileInfoReducer,
         wsOrders: wsSliceOrderFeed,
         wsUserOrders: wsSliceUserOrders,
+        orderInfo: orderInfoReducer,
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({

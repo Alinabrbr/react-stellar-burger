@@ -26,6 +26,18 @@ export type TOrders = {
     totalToday: number;
 }
 
+export type TOrderInfo = {
+    _id: string;
+    ingredients: Array<string>;
+    owner: string;
+    status: string;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+    number: number;
+    __v: number;
+}
+
 export type TOrder = {
     ingredients: string[],
     _id: string;
@@ -50,6 +62,10 @@ export type UserDto = {
     name: string;
 }
 
+export type OrderIdResponse = ServerResponse<{
+    orders: TOrderInfo[];
+}>
+
 export type UserResponse = ServerResponse<{
     user: UserDto;
     message: string | null;
@@ -60,7 +76,7 @@ export type AuthResponse = ServerResponse<{
     refreshToken: string;
 }>
 
-type ServerResponse<T> = {
+export type ServerResponse<T> = {
     success: boolean;
 } & T;
 

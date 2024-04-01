@@ -1,4 +1,4 @@
-import {UserResponseToken} from "./types/types";
+import {OrderIdResponse, TIngredient, TOrder, TOrderInfo, UserResponseToken} from "./types/types";
 
 export const urlApi = "https://norma.nomoreparties.space/api";
 
@@ -20,6 +20,21 @@ export const postOrderRequest = ({ingredients, token}: TPostOrderRequest): Promi
             "Authorization": token,
         },
     })
+}
+
+export function getOrderInfo(number: string): Promise<any> {
+    return request<OrderIdResponse>(`/orders/${number}`);
+}
+
+export function collectOrderIngredients(order: TOrder | TOrderInfo, ingredients: TIngredient[]): TIngredient[] {
+    let orderIngredients: TIngredient[] = [];
+    order.ingredients.forEach(idIngredient => {
+        const ingredient = ingredients.find(element => element._id === idIngredient);
+        if (ingredient) {
+            orderIngredients.push(ingredient);
+        }
+    });
+    return orderIngredients;
 }
 
 export async function request<T>(endpoint: string, options: RequestInit = {}) {

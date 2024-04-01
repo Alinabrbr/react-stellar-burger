@@ -13,3 +13,20 @@ export const calculatePriceOrder = (
     });
     return totalPrice;
 };
+
+export function getStatus(order: TOrder): string {
+    switch (order.status) {
+        case "done": {
+            return "Выполнен";
+        }
+        case "pending": {
+            return "Готовится";
+        }
+        case "created": {
+            return "Создан";
+        }
+        default: {
+            return "Отменен";
+        }
+    }
+}

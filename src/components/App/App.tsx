@@ -19,11 +19,15 @@ import {useAppDispatch} from "../../utils/types/types";
 import OrderFeed from "../../pages/OrderFeed/OrderFeed";
 import ProfileOrders from "../../pages/ProfileOrders/ProfileOrders";
 import ProfileEdit from "../../pages/ProfileEdit/ProfileEdit";
+import OrderId from "../../pages/Order-id/Order-id";
 
 function App(): JSX.Element {
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    const location = useLocation();
+    const background = location.state && location.state.background;
 
     useEffect(() => {
         dispatch(getIngredients());
@@ -31,12 +35,9 @@ function App(): JSX.Element {
 
     const closeModal = (): void => {
         return (
-            navigate("/")
+            navigate(-1)
         )
     }
-
-    const location = useLocation();
-    const background = location.state && location.state.background;
 
     return (
         <DndProvider backend={HTML5Backend}>
@@ -54,24 +55,19 @@ function App(): JSX.Element {
                         <Route path="profile" element={<ProtectedRoute children={<Profile/>} unauthOnly={false}/>}>
                             <Route path="/profile" element={<ProfileEdit/>} />
                             <Route path="/profile/orders" element={<ProfileOrders/>} />
-                            {/*<Route path="profile/orders/:id" element={<OrderDetails/>}/>*/}
                         </Route>
+                        <Route path="profile/orders/:id" element={<OrderId/>}/>
                         <Route path="ingredients/:id" element={<IngredientDetails/>}/>
                         <Route path="feed" element={<OrderFeed/>}/>
-                        {/*<Route path="feed/:id" element={<FeedDetails/>}/>*/}
+                        <Route path="feed/:id" element={<OrderId/>}/>
                         <Route path="*" element={<NotFound/>}/>
                     </Route>
                 </Routes>
                 {background && (
                     <Routes>
-                        <Route
-                            path="/ingredients/:id"
-                            element={
-                                <Modal closeModal={closeModal}>
-                                    <IngredientDetails/>
-                                </Modal>
-                            }
-                        />
+                        <Route path="/ingredients/:id" element={<Modal closeModal={closeModal}><IngredientDetails/></Modal>}/>
+                        <Route path="/profile/orders/:id" element={<Modal closeModal={closeModal}><OrderId/></Modal>}/>
+                        <Route path="/feed/:id" element={<Modal closeModal={closeModal}><OrderId/></Modal>}/>
                     </Routes>
                 )}
             </div>
