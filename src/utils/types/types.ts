@@ -19,6 +19,36 @@ export type TIngredient = {
     isLocked?: boolean;
 }
 
+export type TOrders = {
+    success: boolean;
+    orders: [TOrder];
+    total: number;
+    totalToday: number;
+}
+
+export type TOrderInfo = {
+    _id: string;
+    ingredients: Array<string>;
+    owner: string;
+    status: string;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+    number: number;
+    __v: number;
+}
+
+export type TOrder = {
+    ingredients: string[],
+    _id: string;
+    status: string;
+    number: number;
+    createdAt: string;
+    updatedAt: string;
+    name?: string;
+    price?: number;
+}
+
 export type TMessageResponse = ServerResponse<{
     message: string | null;
 }>
@@ -32,6 +62,10 @@ export type UserDto = {
     name: string;
 }
 
+export type OrderIdResponse = ServerResponse<{
+    orders: TOrderInfo[];
+}>
+
 export type UserResponse = ServerResponse<{
     user: UserDto;
     message: string | null;
@@ -42,12 +76,22 @@ export type AuthResponse = ServerResponse<{
     refreshToken: string;
 }>
 
-type ServerResponse<T> = {
+export type ServerResponse<T> = {
     success: boolean;
 } & T;
 
 export type UserResponseToken = ServerResponse<{
     user: UserDto;
+    accessToken: string;
+    refreshToken: string;
+}>;
+
+export type wsConnect = {
+    wsUrl: string;
+    withTokenRefresh: boolean;
+};
+
+export type RefreshResponseWithTokenType = ServerResponse<{
     accessToken: string;
     refreshToken: string;
 }>;

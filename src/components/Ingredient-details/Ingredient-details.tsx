@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './Ingredient-details.module.css'
 import {useParams} from "react-router-dom";
-import {getCards, getCardsLoading} from "../../services/cardsSelector";
+import {getCards, getCardsLoading} from "../../services/actions/actionsSelector";
 import {TIngredient, useAppSelector} from "../../utils/types/types";
 
 export default function IngredientDetails() : JSX.Element {
@@ -12,7 +12,9 @@ export default function IngredientDetails() : JSX.Element {
     const el: TIngredient | undefined = cards.find((item: TIngredient): boolean => item._id === id);
 
     if (isCardsLoading || cards.length === 0) {
-        return <>Ingredient is loading</>
+        return <>
+            <h2 className='text_type_main-default title'>Ingredient is loading...</h2>
+        </>
     }
 
     return (

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Button, EmailInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, Navigate} from "react-router-dom";
-import {fetchForgotPasswordResult} from "../../services/forgotPasswordSlice";
+import {fetchForgotPasswordResult} from "../../services/reducers/forgotPasswordSlice";
 import styles from "./Forgot-password.module.css"
 import clsx from "clsx";
 import {useAppDispatch, useAppSelector} from "../../utils/types/types";

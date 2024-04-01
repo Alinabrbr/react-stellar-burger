@@ -22,7 +22,7 @@ export default function LayoutHeader(): JSX.Element {
                             </div>
 
                             <div className={clsx(styles.navContainer, 'pt-4 pb-4 pl-5 pr-5')}>
-                                <NavLink className={getActiveClass} to=''>
+                                <NavLink className={getActiveClass} to='feed'>
                                     <ListIcon type="secondary"/>
                                     <p className='text text_type_main-default ml-2'>Лента
                                         заказов</p>

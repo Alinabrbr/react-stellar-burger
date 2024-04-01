@@ -1,0 +1,33 @@
+.section {
+  max-width: 600px;
+  height: calc(100vh - 88px);
+  margin-top: 0;
+}
+
+.sectionOrdersInfo {
+  max-height: 900px;
+  min-height: 300px;
+  min-width: 600px;
+}
+
+.container {
+  max-height: 800px;
+  overflow-y: scroll;
+}
+
+.ordersContainer::-webkit-scrollbar {
+  width: 8px;
+}
+.ordersContainer::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+.ordersContainer::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
+.orders {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 584px);
+  gap: 24px 0;
+  list-style: none;
+}

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import styles from "./Log-in.module.css";
 import {Button, EmailInput, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link} from "react-router-dom";
-import {fetchLoginResult} from "../../services/registerAndAuthorizationSlice";
+import {fetchLoginResult} from "../../services/reducers/registerAndAuthorizationSlice";
 import clsx from "clsx";
 import {useAppDispatch} from "../../utils/types/types";
 

@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {v4 as uuidv4} from 'uuid';
-import {TIngredient} from "../utils/types/types";
+import {TIngredient} from "../../utils/types/types";
 
 type TInitialState = {
     constructorIngredient: TIngredient[],

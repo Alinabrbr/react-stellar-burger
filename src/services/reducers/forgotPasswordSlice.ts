@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction, SerializedError} from "@reduxjs/toolkit";
-import {postForgotPasswordRequest} from "../utils/auth";
-import {TMessageResponse} from "../utils/types/types";
+import {postForgotPasswordRequest} from "../../utils/auth";
+import {TMessageResponse} from "../../utils/types/types";
 
 
 type TInitialState = {

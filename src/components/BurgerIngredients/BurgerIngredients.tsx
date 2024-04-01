@@ -4,8 +4,8 @@ import Container from "../Container/Container";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import Card from "../Card/Card";
 import React, {useEffect, useState} from "react";
-import {getCards} from "../../services/cardsSelector";
-import {constructorSelector} from "../../services/constructorSelector";
+import {getCards} from "../../services/actions/actionsSelector";
+import {constructorSelector} from "../../services/actions/actionsSelector";
 import {useInView} from "react-intersection-observer";
 import {TIngredient, useAppSelector} from "../../utils/types/types";
 

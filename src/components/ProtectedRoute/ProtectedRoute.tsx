@@ -1,7 +1,7 @@
 import React from "react";
 import {Navigate} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {getAccessToken} from "../../services/tokenSelector";
+import {getAccessToken} from "../../services/actions/actionsSelector";
+import {useAppSelector} from "../../utils/types/types";
 
 type TProtected = {
     unauthOnly: boolean;
@@ -9,7 +9,7 @@ type TProtected = {
 }
 
 function ProtectedRoute({children, unauthOnly = false}: TProtected): JSX.Element | null {
-    const accessToken = useSelector(getAccessToken);
+    const accessToken = useAppSelector(getAccessToken);
     const refreshToken = localStorage.getItem("refreshToken");
 
     if (!accessToken && refreshToken) {

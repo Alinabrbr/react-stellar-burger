@@ -6,15 +6,15 @@ import Price from "../Price/Price";
 import {Button, ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../Modal/Modal";
 import OrderDetails from "../Order-details/Order-details";
-import {closePopup, openPopup} from "../../services/orderSlice";
-import {getModalOrderSelector} from "../../services/getModalOrderSelector";
-import {addIngredient, clearStore, removeIngredient} from "../../services/constructorSlice";
+import {closePopup, openPopup} from "../../services/reducers/orderSlice";
+import {getModalOrderSelector} from "../../services/actions/actionsSelector";
+import {addIngredient, clearStore, removeIngredient} from "../../services/reducers/constructorSlice";
 import {useDrop} from "react-dnd";
-import {totalPriceSelector} from "../../services/totalPriceSelector";
-import {fetchOrderResult} from "../../services/orderDetailsSlice";
+import {totalPriceSelector} from "../../services/actions/actionsSelector";
+import {fetchOrderResult} from "../../services/reducers/orderDetailsSlice";
 import {useNavigate} from "react-router-dom";
 import {TIngredient, useAppDispatch, useAppSelector} from "../../utils/types/types";
-import {constructorSelector} from "../../services/constructorSelector";
+import {constructorSelector} from "../../services/actions/actionsSelector";
 
 export default function BurgerConstructor(): JSX.Element {
 
