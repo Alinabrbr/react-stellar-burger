@@ -7,7 +7,7 @@ type TInitialState = {
     error: SerializedError | null
 }
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
     order: null,
     loading: true,
     error: null

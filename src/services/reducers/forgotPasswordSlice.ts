@@ -2,14 +2,13 @@ import {createAsyncThunk, createSlice, PayloadAction, SerializedError} from "@re
 import {postForgotPasswordRequest} from "../../utils/auth";
 import {TMessageResponse} from "../../utils/types/types";
 
-
 type TInitialState = {
     isLoading: boolean;
     error: SerializedError | null;
     success: boolean;
 }
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
     isLoading: false,
     error: null,
     success: false
@@ -20,16 +19,10 @@ export const fetchForgotPasswordResult = createAsyncThunk(
     postForgotPasswordRequest
 );
 
-
-
 const forgotPassword = createSlice({
     name: 'forgotPassword',
     initialState,
-    reducers: {
-        clearSuccess: (state) => {
-            state.success = false;
-        }
-    },
+    reducers: {},
     extraReducers: builder => {
         builder
             .addCase(fetchForgotPasswordResult.pending.type, state => {
@@ -48,4 +41,3 @@ const forgotPassword = createSlice({
 })
 
 export default forgotPassword.reducer;
-export const {clearSuccess} = forgotPassword.actions;

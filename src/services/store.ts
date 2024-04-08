@@ -1,6 +1,5 @@
 import {configureStore} from "@reduxjs/toolkit";
 import cardsReducer from "./reducers/cardsSlice";
-import popupInfoReducer from "./reducers/ingredientsInfoSlice";
 import popupOrderReducer from "./reducers/orderSlice";
 import burgerConstructorReducer from "./reducers/constructorSlice";
 import orderDetailsReducer from "./reducers/orderDetailsSlice";
@@ -50,7 +49,6 @@ const userOrdersMiddleware = socketMiddleware(wsActionUserOrders);
 export const store = configureStore({
     reducer: {
         cards: cardsReducer,
-        popupInfo: popupInfoReducer,
         popupOrder: popupOrderReducer,
         burgerConstructor: burgerConstructorReducer,
         orderDetails: orderDetailsReducer,

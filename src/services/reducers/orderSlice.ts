@@ -4,8 +4,8 @@ type TInitialState = {
     isModalState: boolean;
 }
 
-const initialState: TInitialState = {
-    isModalState: false,
+export const initialState: TInitialState = {
+    isModalState: false
 };
 
 const orderPopupSlice = createSlice({

@@ -30,7 +30,7 @@ export default function Modal({children, closeModal}: TModalProps): JSX.Element 
             <>
                 <div className={clsx(styles.modal, 'pt-10 pr-10 pl-10 pb-15')}>
                     <div className={styles.children_container}>{children}</div>
-                    <div className={styles.closeIcon} onClick={closeModal}>
+                    <div className={styles.closeIcon} onClick={closeModal} data-cy="close-modal">
                         <CloseIcon type="primary"/>
                     </div>
                 </div>

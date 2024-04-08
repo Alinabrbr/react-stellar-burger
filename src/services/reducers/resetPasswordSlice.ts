@@ -8,7 +8,7 @@ type TInitialState = {
     success: boolean;
 }
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
     isLoading: false,
     error: null,
     success: false

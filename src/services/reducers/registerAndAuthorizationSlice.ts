@@ -13,7 +13,7 @@ type TInitialState = {
     message: string | null;
 }
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
     isLoading: false,
     error: null,
     success: false,
@@ -45,11 +45,7 @@ export const fetchRefreshTokenResult = createAsyncThunk(
 const Register = createSlice({
     name: 'register',
     initialState,
-    reducers: {
-        clearAccessToken: (state) => {
-            state.accessToken = null;
-        },
-    },
+    reducers: {},
     extraReducers: builder => {
         builder
             .addCase(fetchRegisterProfileResult.pending.type, state => {
@@ -113,4 +109,3 @@ function handleLogin(state: TInitialState, action: PayloadAction<UserResponseTok
 }
 
 export default Register.reducer;
-export const {clearAccessToken} = Register.actions;

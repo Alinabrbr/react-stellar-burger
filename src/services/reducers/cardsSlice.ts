@@ -8,7 +8,7 @@ type TInitialState = {
     error: SerializedError | null;
 }
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
     cardsArray: [],
     isLoading: false,
     error: null
@@ -28,6 +28,7 @@ const cardsSlice = createSlice({
     extraReducers: builder => {
         builder
             .addCase(getIngredients.pending.type, state => {
+                state.cardsArray = [];
                 state.isLoading = true;
                 state.error = null;
             })

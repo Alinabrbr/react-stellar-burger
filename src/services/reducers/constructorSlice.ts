@@ -7,7 +7,7 @@ type TInitialState = {
     totalPrice: number,
 }
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
     constructorIngredient: [],
     totalPrice: 0,
 };
@@ -33,11 +33,17 @@ const constructorSlice = createSlice({
                 }
             },
             prepare: (payload) => {
+                if (payload.ingredientId === null) {
+                    return {
+                        payload: {
+                            ...payload,
+                            ingredientId: uuidv4()
+                        },
+                    };
+                }
+
                 return {
-                    payload: {
-                        ...payload,
-                        ingredientId: uuidv4()
-                    },
+                    payload: payload,
                 };
             },
         },

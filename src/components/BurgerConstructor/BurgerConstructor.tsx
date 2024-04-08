@@ -56,10 +56,10 @@ export default function BurgerConstructor(): JSX.Element {
 
     return (
         <>
-            <section className={clsx(styles.burgerConstructor, 'mt-25')} ref={dropRef}
+            <section className={clsx(styles.burgerConstructor, 'mt-25')} ref={dropRef} data-cy="constructor"
                      onDragOver={(evt) => evt.preventDefault()}>
                 <div className={clsx(styles.burgerIngredientsContainer, 'pl-8')}>
-                    <div className='mr-4 ml-4'>
+                    <div className='mr-4 ml-4' data-cy="bun-top">
                         {
                             bun && (
                                 <ConstructorElement text={`${bun.name} (верх)`} isLocked={true} type='top'
@@ -70,7 +70,7 @@ export default function BurgerConstructor(): JSX.Element {
                 </div>
 
                 <div className={clsx(styles.burgerIngredientsContainerScroll, 'mb-4')}>
-                    <div className='mr-4'>
+                    <div className='mr-4' data-cy="constructor-ingredients">
                         {cards.map((card: TIngredient, index: number) => (
                             (card.type === "main" || card.type === 'sauce') &&
                             <ConstructorElementBun card={card} index={index} key={card.ingredientId}
@@ -80,7 +80,7 @@ export default function BurgerConstructor(): JSX.Element {
                 </div>
 
                 <div className={clsx(styles.burgerIngredientsContainer, 'pl-8')}>
-                    <div className='mr-4 ml-4'>
+                    <div className='mr-4 ml-4' data-cy="bun-bottom">
                         {
                             bun && (
                                 <ConstructorElement text={`${bun.name} (низ)`} isLocked={true} type='bottom'
@@ -92,7 +92,7 @@ export default function BurgerConstructor(): JSX.Element {
 
                 <div className={clsx(styles.priceContainer, 'mt-10')}>
                     <Price priceSize={"medium"} price={totalPrice}/>
-                    <Button onClick={() => {
+                    <Button data-cy="order-button" onClick={() => {
                         if (!accessToken) {
                             return (
                                 navigate("/login")
