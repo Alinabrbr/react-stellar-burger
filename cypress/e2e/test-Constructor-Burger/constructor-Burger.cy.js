@@ -54,7 +54,9 @@ describe("order works correctly", () => {
     });
     it("should clear constructor after order", () => {
         cy.createOrder();
-        cy.get('[data-cy="close-modal"]').click();
+
+        cy.get('[data-cy="close-modal"]').as('closeModalBtn')
+        cy.get('@closeModalBtn').click();
         cy.get('[data-cy="order-number"]').should("not.exist");
         cy.get('[data-cy="constructor-ingredients"]').contains(FILLING_1).should("not.exist");
     });

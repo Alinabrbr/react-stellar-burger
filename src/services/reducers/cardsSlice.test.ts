@@ -56,7 +56,6 @@ describe("cards reducer", () => {
         })).toEqual({
             ...initialState,
             isLoading: true,
-            error: null
         })
     })
     it("cards fulfilled", () => {
@@ -64,9 +63,8 @@ describe("cards reducer", () => {
             type: "cardsGet/fulfilled",
             payload: mockPayload
         })).toEqual({
+            ...initialState,
             cardsArray: mockPayload,
-            isLoading: false,
-            error: null
         })
     })
     it("cards rejected with message", () => {
@@ -74,8 +72,8 @@ describe("cards reducer", () => {
             type: "cardsGet/rejected",
             payload: mockCardsRequestWithMessage
         })).toEqual({
+            ...initialState,
             cardsArray: [],
-            isLoading: false,
             error: Error(mockCardsRequestWithMessage.message)
         })
     })
@@ -84,9 +82,7 @@ describe("cards reducer", () => {
             type: "cardsGet/rejected",
             payload: {}
         })).toEqual({
-            cardsArray: [],
-            isLoading: false,
-            error: null
+            ...initialState
         })
     })
 })

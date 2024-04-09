@@ -33,7 +33,7 @@ const constructorSlice = createSlice({
                 }
             },
             prepare: (payload) => {
-                if (payload.ingredientId === null) {
+                if (!payload.ingredientId) {
                     return {
                         payload: {
                             ...payload,

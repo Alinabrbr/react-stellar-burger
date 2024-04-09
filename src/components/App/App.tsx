@@ -45,21 +45,22 @@ function App(): JSX.Element {
                 <Routes location={background || location}>
                     <Route path="/" element={<LayoutHeader/>}>
                         <Route index element={<Constructor/>}/>
-                        <Route path="login" element={<ProtectedRoute unauthOnly={true}><LogIn/></ProtectedRoute>}/>
-                        <Route path="register"
+                        <Route path="/react-stellar-burger" element={<Constructor/>}/>
+                        <Route path="/login" element={<ProtectedRoute unauthOnly={true}><LogIn/></ProtectedRoute>}/>
+                        <Route path="/register"
                                element={<ProtectedRoute unauthOnly={true}><Register/></ProtectedRoute>}/>
-                        <Route path="forgot-password"
+                        <Route path="/forgot-password"
                                element={<ProtectedRoute unauthOnly={true}><ForgotPassword/></ProtectedRoute>}/>
-                        <Route path="reset-password"
+                        <Route path="/reset-password"
                                element={<ProtectedRoute unauthOnly={true}><ResetPassword/></ProtectedRoute>}/>
-                        <Route path="profile" element={<ProtectedRoute children={<Profile/>} unauthOnly={false}/>}>
+                        <Route path="/profile" element={<ProtectedRoute children={<Profile/>} unauthOnly={false}/>}>
                             <Route path="/profile" element={<ProfileEdit/>} />
                             <Route path="/profile/orders" element={<ProfileOrders/>} />
                         </Route>
-                        <Route path="profile/orders/:id" element={<OrderId/>}/>
-                        <Route path="ingredients/:id" element={<IngredientDetails/>}/>
-                        <Route path="feed" element={<OrderFeed/>}/>
-                        <Route path="feed/:id" element={<OrderId/>}/>
+                        <Route path="/profile/orders/:id" element={<OrderId/>}/>
+                        <Route path="/ingredients/:id" element={<IngredientDetails/>}/>
+                        <Route path="/feed" element={<OrderFeed/>}/>
+                        <Route path="/feed/:id" element={<OrderId/>}/>
                         <Route path="*" element={<NotFound/>}/>
                     </Route>
                 </Routes>
