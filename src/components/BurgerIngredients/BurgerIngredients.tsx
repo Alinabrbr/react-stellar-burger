@@ -43,7 +43,7 @@ export default function BurgerIngredients(): JSX.Element {
                     <Tab value="main" active={current === 'main'} onClick={() => {}}>Начинки</Tab>
                 </Container>
             </div>
-            <div className={styles.cardsContainer}>
+            <div className={styles.cardsContainer} data-cy="ingredients">
                 <h2 className='text text_type_main-medium'>Булки</h2>
                 <ul className={clsx(styles.cards, 'mt-6 ml-4')} ref={bunsRef}>
                     {cards.map((card: TIngredient) => (card.type === "bun" &&

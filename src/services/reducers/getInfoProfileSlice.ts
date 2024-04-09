@@ -9,7 +9,7 @@ type TInitialState = {
     email: string;
 }
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
     isLoading: true,
     error: null,
     name: "",
