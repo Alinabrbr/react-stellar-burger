@@ -6,6 +6,12 @@
   justify-content: flex-end;
 }
 
+.burgerConstructorEmpty {
+  padding: 260px 50px;
+  border-style: dashed;
+  border-color: #801AB2;
+}
+
 .burgerIngredientsContainer {
   min-width: 600px;
 }

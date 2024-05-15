@@ -58,37 +58,45 @@ export default function BurgerConstructor(): JSX.Element {
         <>
             <section className={clsx(styles.burgerConstructor, 'mt-25')} ref={dropRef} data-cy="constructor"
                      onDragOver={(evt) => evt.preventDefault()}>
-                <div className={clsx(styles.burgerIngredientsContainer, 'pl-8')}>
-                    <div className='mr-4 ml-4' data-cy="bun-top">
-                        {
-                            bun && (
-                                <ConstructorElement text={`${bun.name} (верх)`} isLocked={true} type='top'
-                                                    thumbnail={bun.image} price={bun.price}/>
-                            )
-                        }
+                {cards.length === 0 ?
+                    <div className={clsx(styles.burgerConstructorEmpty)}>
+                        <p className='text text_type_main-default'>Перетащите сюда необходимые ингредиенты</p>
                     </div>
-                </div>
+                    :
+                    <div>
+                        <div className={clsx(styles.burgerIngredientsContainer, 'pl-8')}>
+                            <div className='mr-4 ml-4' data-cy="bun-top">
+                                {
+                                    bun && (
+                                        <ConstructorElement text={`${bun.name} (верх)`} isLocked={true} type='top'
+                                                            thumbnail={bun.image} price={bun.price}/>
+                                    )
+                                }
+                            </div>
+                        </div>
 
-                <div className={clsx(styles.burgerIngredientsContainerScroll, 'mb-4')}>
-                    <div className='mr-4' data-cy="constructor-ingredients">
-                        {cards.map((card: TIngredient, index: number) => (
-                            (card.type === "main" || card.type === 'sauce') &&
-                            <ConstructorElementBun card={card} index={index} key={card.ingredientId}
-                                                   handleClose={() => deleteIngredient(card)}/>
-                        ))}
-                    </div>
-                </div>
+                        <div className={clsx(styles.burgerIngredientsContainerScroll, 'mb-4')}>
+                            <div className='mr-4' data-cy="constructor-ingredients">
+                                {cards.map((card: TIngredient, index: number) => (
+                                    (card.type === "main" || card.type === 'sauce') &&
+                                    <ConstructorElementBun card={card} index={index} key={card.ingredientId}
+                                                           handleClose={() => deleteIngredient(card)}/>
+                                ))}
+                            </div>
+                        </div>
 
-                <div className={clsx(styles.burgerIngredientsContainer, 'pl-8')}>
-                    <div className='mr-4 ml-4' data-cy="bun-bottom">
-                        {
-                            bun && (
-                                <ConstructorElement text={`${bun.name} (низ)`} isLocked={true} type='bottom'
-                                                    thumbnail={bun.image} price={bun.price}/>
-                            )
-                        }
+                        <div className={clsx(styles.burgerIngredientsContainer, 'pl-8')}>
+                            <div className='mr-4 ml-4' data-cy="bun-bottom">
+                                {
+                                    bun && (
+                                        <ConstructorElement text={`${bun.name} (низ)`} isLocked={true} type='bottom'
+                                                            thumbnail={bun.image} price={bun.price}/>
+                                    )
+                                }
+                            </div>
+                        </div>
                     </div>
-                </div>
+                }
 
                 <div className={clsx(styles.priceContainer, 'mt-10')}>
                     <Price priceSize={"medium"} price={totalPrice}/>
