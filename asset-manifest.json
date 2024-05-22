@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "./static/css/main.49f10ccd.css",
-    "main.js": "./static/js/main.34788ebe.js",
+    "main.css": "./static/css/main.18dbef2e.css",
+    "main.js": "./static/js/main.95689857.js",
     "static/js/787.438bf4e7.chunk.js": "./static/js/787.438bf4e7.chunk.js",
     "static/media/JetBrainsMono-Bold.woff": "./static/media/JetBrainsMono-Bold.3914674f1cb2335acf26.woff",
     "static/media/JetBrainsMono-Regular.woff": "./static/media/JetBrainsMono-Regular.f52bee61d00ce995b89f.woff",
@@ -11,12 +11,12 @@
     "static/media/iceland.woff2": "./static/media/iceland.4ae67a017a5ff82bbbb7.woff2",
     "static/media/icon-modal-done.png": "./static/media/icon-modal-done.367870a20c4ffba1175a.png",
     "index.html": "./index.html",
-    "main.49f10ccd.css.map": "./static/css/main.49f10ccd.css.map",
-    "main.34788ebe.js.map": "./static/js/main.34788ebe.js.map",
+    "main.18dbef2e.css.map": "./static/css/main.18dbef2e.css.map",
+    "main.95689857.js.map": "./static/js/main.95689857.js.map",
     "787.438bf4e7.chunk.js.map": "./static/js/787.438bf4e7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.49f10ccd.css",
-    "static/js/main.34788ebe.js"
+    "static/css/main.18dbef2e.css",
+    "static/js/main.95689857.js"
   ]
 }
